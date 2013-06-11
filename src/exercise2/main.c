@@ -71,7 +71,7 @@ void clreol() {
 }
 
 void gotoxy( int x, int y ) {
-	printf( "%c[%d;%dH", ESC, x, y );
+	printf( "%c[%d;%dH", ESC, y, x );
 }
 
 void underline( char on ) {
@@ -103,26 +103,111 @@ void textType( char type ) {
 	printf( "%c[%dm", ESC, type ); // any escapecode
 }
 
+char strLen( char* string ) {
+	char i = 0;
+	while( string[i] != 0 )
+		i++;
+	return i;
+}
+
+void window( char x, char y, char width, char height, char* header, char type ) { // type: abc, a: erase, b: fat, c: wide
+	char i, len, trunc;
+	char tLeft,	tRight,	lH,	lV, trCorn,	tlCorn,	brCorn,	blCorn;
+	if ( type & 0x02 ) {
+		tLeft = 180;
+		tRight = 195;
+		lH = 196;
+		lV = 179;
+		trCorn = 191;
+		tlCorn = 218; 
+		brCorn = 217;
+		blCorn = 192;
+	} else {
+		tLeft = 185;
+		tRight = 204;
+		lH = 205;
+		lV = 186;
+		trCorn = 187;
+		tlCorn = 201; 
+		brCorn = 188;
+		blCorn = 200;
+	}
+	gotoxy( x, y ); //Go to top left corner
+	//conceal
+	textType( 8 );
+	// Draw header
+	printf( "%c%c", tlCorn, tLeft ); //corner and start of header
+	reverse( true ); //reverse text, beginnig of header
+	len = strLen( header );
+	if ( len > width - 4 ) {
+		trunc = true;
+		len = width - 5;
+	} else {
+		trunc = false;
+	}
+	for( i = 0; i < len; i++ )
+		printf( "%c", header[i] ); // print header
+	if ( trunc ) {
+		printf( "\xF9" ); // print dots if truncated
+	} else {
+		len = width - len - 4; // get number of spaces
+		if ( type & 0x01 ) { // if thick header
+			for( i = 0; i < len; i++ )
+				printf( " " ); // print space
+			reverse( false ); //reverse text
+			printf( "%c%c", tRight, trCorn ); // end header
+		} else {
+			reverse( false ); //reverse text
+			printf( "%c", tRight ); // end header
+			for( i = 0; i < len; i++ )
+				printf( "%c", lH ); // print line
+			printf( "%c", trCorn );
+		}
+	}
+	// Draw Rest
+	for ( i = 2; i < height; i++ ) {
+		gotoxy( x, y + i - 1 ); // move curser
+		printf( "%c", lV ); //vertical line
+		if ( type & 0x04 ) // clear?
+			for ( len = 2; len < width; len ++)
+				printf( " " ); //clear window
+		else
+			printf( "%c[%dC", ESC, width - 2 ); // move curser
+		printf( "%c", lV ); //vertical line	
+	}
+	gotoxy( x, y + height - 1 );
+	printf( "%c", blCorn ); //corner
+	for ( len = 2; len < width; len ++)
+		printf( "%c", lH ); //line
+	printf( "%c", brCorn ); //corner
+	// reveal
+	textType( 28 );
+}
 
 void main() {
+	long x, y, i, dx, dy;
+	dx = 2;
+	dy = 1;
+	x = 1;
+	y = 1;
 	init_uart( _UART0, _DEFFREQ, _DEFBAUD );
 	reset();
 	clrscr();
-	printf( "Hello word1\n" );
-	color( 2, 3 );
-	printf( "Hello word2\n" );
-	reset();
-	reverse( true );
-	printf( "Hello word3\n" );
-	reverse( false );
-	printf( "Hello word4\n" );
-	blink( true );
-	printf( "Hello word5\n" );
-	blink( false );
-	underline( true );
-	printf( "Hello word5\n" );
-	underline( false );
-	printf( "Hello word6\n" );
-	
-	while( 1 );
+	while( 1 ){
+		x += dx;
+		y += dy;
+		if ( ( x < 1 ) || ( x > 300 ) ) {
+			dx = -dx;
+		}
+		if ( ( y < 1 ) || ( y > 200 ) ) {
+			dy = -dy;
+		}
+		
+		clrscr();
+		window( (char)(x>>3), (char)(y>>3), 10, 5, "lol", 1 );
+		for( i = 0; i < 0x1FFF; i++ ){
+			asm("NOP");
+		}
+	}
+
 }

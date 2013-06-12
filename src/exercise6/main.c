@@ -187,11 +187,15 @@ void inputhandler() {
 	old = readkey();
 }
 
+
+//print mainclock with padded zeroes at given location
 void printMainClock( char xpos, char ypos ) {
 	gotoxy( xpos, ypos );
 	printf( "Time since start:\t %d:%02d:%02d.--", main_clock.hours, main_clock.minutes, main_clock.seconds );
 }
 
+
+//print split times with padded zeroes at a given location
 void printSplitTimes( char xpos, char ypos ) {
 	gotoxy( xpos, ypos );
 	if ( split1.running )
@@ -246,7 +250,7 @@ void main() {
 	while( 1 ) {
 		printMainClock( CLOCK_WINDOW_X + 2, CLOCK_WINDOW_Y + 2 ); // right inside the window
 		printSplitTimes( CLOCK_WINDOW_X + 2, CLOCK_WINDOW_Y + 3); //below main clock, 
-		inputhandler();
+		inputhandler(); // check for input and perform relevant ops
 		for( i = 0; i < 0x6FFF; i++ );
 	}
 

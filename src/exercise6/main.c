@@ -52,9 +52,6 @@ void timer0int() {
 	
 }
 
-#define true 1
-#define false 0
-
 void setUpButtons() {
 
 	PFADDR = 0x02;
@@ -251,7 +248,7 @@ void main() {
 		printMainClock( CLOCK_WINDOW_X + 2, CLOCK_WINDOW_Y + 2 ); // right inside the window
 		printSplitTimes( CLOCK_WINDOW_X + 2, CLOCK_WINDOW_Y + 3); //below main clock, 
 		inputhandler(); // check for input and perform relevant ops
-		for( i = 0; i < 0x6FFF; i++ );
+		for( i = 0; i < 0x6FFF; i++ );  //nop for a sane refresh value
 	}
 
 }

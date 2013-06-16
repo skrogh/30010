@@ -3,11 +3,12 @@ Arkanoid/breakout clone with multihit and colored brickers.
 Standard reflection from the striker.
 Several levels.
 Beautiful backgrounds.
-Highscores.
+Highscores on permanent media.
 More than one life.
-Menu system.
+Menu system to show highscores and enable/disable features/modes.
 Sound.
-Joystick
+Joystick.
+Powerups.
 
 #Application layer
 init() // init all game objects, striker, levels, modes, graphics, inputs, outputs timers etc.etc

@@ -1,6 +1,6 @@
 #include <eZ8.h>
 #include <sio.h>
-#include "graphics.h"
+#include "ansi.h"
 
 #define true 1
 #define false 0

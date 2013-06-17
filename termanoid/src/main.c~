@@ -6,17 +6,28 @@
 #include "constants.h"
 #include "input.h"
 #include "striker.h"
+#include "timekeeping.h"
+
+char flag;
+
+void derphandler(void) {
+	flag = true;
+}
 
 void main() {
-	striker_t * striker = create_striker( 10, 10 );
+	striker_t * striker = create_striker( 40, 25 );
 	
 	init_uart( _UART0, _DEFFREQ, _DEFBAUD );
 	clrscr();
-
+	flag = true;
+	setup_timer( 0, (unsigned long)66666, 2, &derphandler );
+	
 	while ( 1 ) {
-		clrscr();
 		get_input();
-		striker -> update( striker );
-		striker -> render( striker );
+		if ( flag ) {
+			striker -> update( striker );
+			striker -> render( striker );
+			flag = false;
+		}
 	}
 }

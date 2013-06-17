@@ -17,6 +17,12 @@ void update_striker( striker_t * striker ) {
 	//new values
 	striker -> x += striker -> x_velocity * inputvalues[ RIGHT ];
 	striker -> x -= striker -> x_velocity * inputvalues[ LEFT ];
+
+	//boundary check
+	if ( striker -> x + STRIKER_WIDTH > TERM_WIDTH )
+	   striker -> x = TERM_WIDTH - STRIKER_WIDTH;
+	else if ( striker -> x < 0 )
+		striker -> x = 0;	
 }
 
 void render_striker( striker_t * striker ) {

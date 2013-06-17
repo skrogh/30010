@@ -3,6 +3,7 @@
 #define _STRIKER_H
 
 #define STRIKER_GRAPHIC "HERPDERP"
+#define STRIKER_WIDTH 8
 #define STRIKER_SPACES "        "
 typedef struct tag_striker striker_t; //make striker_t known to the compiler
 

@@ -20,11 +20,11 @@ void render_striker( striker_t * striker ) {
 
 striker_t *  create_striker( char x, char y ) {
 	striker_t * striker = malloc( sizeof ( striker_t ) );
+	striker -> cleanup = (cleanup_t*)malloc( sizeof( cleanup_t ) );
 	striker -> x = x;
 	striker -> y = y;
 	striker -> x_velocity = 1;
 	striker -> x_direction = 0;
-	striker -> cleanup = (cleanup_t*)malloc( sizeof( cleanup_t ) );
 	( (cleanup_t*)striker -> cleanup ) -> old_x = x;
 	( (cleanup_t*)striker -> cleanup ) -> old_y = y;
 	striker -> render = &render_striker;

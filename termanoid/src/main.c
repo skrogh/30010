@@ -7,17 +7,13 @@
 #include "input.h"
 #include "striker.h"
 
-int main() {
+void main() {
 	striker_t * striker = create_striker( 10, 10 );
-	color( 5, 4 );
-	printf( "%s", PILCROW );
-
 	
+	init_uart( _UART0, _DEFFREQ, _DEFBAUD );
+
 	striker -> render( striker );
 
-	//pause before ending
-	getch();
-	while ( getch() != 'q' ) {}
+	while ( 1 ) {}
 
-	return 0;
 }

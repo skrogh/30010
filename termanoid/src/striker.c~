@@ -27,7 +27,7 @@ void render_striker( striker_t * striker ) {
 		return;
 
 	//else refresh the striker
-	gotoxy( old_x, old_y );
+	gotoxy( ( old_x, old_y );
 	draw_chars( STRIKER_SPACES ); 
 	gotoxy( striker -> x, striker -> y );
 	draw_chars( STRIKER_GRAPHIC );

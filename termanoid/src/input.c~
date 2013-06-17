@@ -15,11 +15,10 @@ unsigned char get_input() {
 		switch( getch() ) {
 		case 'a':
 			inputvalues[ LEFT ] = ( inputvalues[ LEFT ] == true ) ? false : true;
-			inputvalues[ RIGHT ] = false;
+			printf( "durr" );
 			break;
 		case 'd':
 			inputvalues[ RIGHT ] = inputvalues[ RIGHT ] == true ? false : true;
-			inputvalues[ LEFT ] = false;
 			break;
 		default:
 			break;

@@ -4,9 +4,12 @@
 #include "input.h"
 #include "constants.h"
 
+enum {SPAWNED, ALIVE, DEAD};
+
 typedef struct cleanup_info {
 	char old_x;
 	char old_y;
+	char state;
 } cleanup_t;
 
 void update_striker( striker_t * striker ) {
@@ -28,10 +31,12 @@ void update_striker( striker_t * striker ) {
 void render_striker( striker_t * striker ) {
 	char old_x = ( (cleanup_t*)striker -> cleanup ) -> old_x;
 	char old_y = ( (cleanup_t*)striker -> cleanup ) -> old_y;
-
-	if ( old_x == striker -> x && old_y == striker -> y )
+	char state = ( (cleanup_t*)striker -> cleanup ) -> state;
+	if ( old_x == striker -> x && old_y == striker -> y && state != SPAWNED )
 		return;
 
+	if ( state == SPAWNED )
+		( (cleanup_t*)striker -> cleanup ) -> state = ALIVE;
 	//else refresh the striker
 	gotoxy( old_x, old_y );
 	draw_chars( STRIKER_SPACES ); 
@@ -44,10 +49,11 @@ striker_t *  create_striker( char x, char y ) {
 	striker -> cleanup = (cleanup_t*)malloc( sizeof( cleanup_t ) );
 	striker -> x = x;
 	striker -> y = y;
-	striker -> x_velocity = 1;
+	striker -> x_velocity = 5;
 	striker -> x_direction = 0;
-	( (cleanup_t*)striker -> cleanup ) -> old_x = x;
-	( (cleanup_t*)striker -> cleanup ) -> old_y = y;
+	( (cleanup_t*)striker -> cleanup ) -> old_x = 0;
+	( (cleanup_t*)striker -> cleanup ) -> old_y = 0;
+	( (cleanup_t*)striker -> cleanup ) -> state = SPAWNED;
 	striker -> render = &render_striker;
 	striker -> update = &update_striker;
 	return striker;

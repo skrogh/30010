@@ -187,3 +187,7 @@ void window( char x, char y, char width, char height, char* header, char type ) 
 void draw_chars( char * chars ) {
 	printf( "%s", chars );
 }
+
+void draw_char( unsigned char symbol ) {
+	putch( symbol );
+}

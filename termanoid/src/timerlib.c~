@@ -21,7 +21,7 @@ void set_timer( char timer, unsigned long u_period, char priority, void (*callba
 	T0CTL = 0x39;
 	T0H = 0x00;
 	T0L = 0x01;
-	T0RH = (unsigned char)(reload_value & 0xFF00);
+	T0RH = (unsigned char)( (reload_value & 0xFF00) >> 8);
 	T0RL = (unsigned char)(reload_value & 0x00FF);
 	IRQ0ENH |= 0x20;
 	IRQ0ENL &= 0xDF;

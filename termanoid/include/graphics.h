@@ -15,4 +15,5 @@ void background_color( unsigned char color );
 void foreground_color( unsigned char color );
 void color( unsigned char foreground, unsigned char background );
 void draw_chars( char * chars );
+void draw_char( unsigned char symbol );
 #endif

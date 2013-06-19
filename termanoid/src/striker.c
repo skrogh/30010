@@ -27,10 +27,10 @@ void update_striker( striker_t * striker ) {
 	//	striker -> x += FIX8_8_MULT( striker -> x_velocity, (char)(joystick_value - 130 ) );
 	//}
 	striker -> x += striker -> x_velocity * inputvalues[ RIGHT ];
-	striker -> x += striker -> x_velocity * inputvalues[ LEFT ];
+	striker -> x -= striker -> x_velocity * inputvalues[ LEFT ];
 
 	//boundary check
-	if ( striker -> x + STRIKER_WIDTH << 8 > TERM_WIDTH << 8 )
+	if ( ( striker -> x + STRIKER_WIDTH ) << 8 > ( TERM_WIDTH << 8 ) )
 	   striker -> x = ( TERM_WIDTH - STRIKER_WIDTH ) << 8;
 	else if ( striker -> x < ( 0 << 8 ) )
 		striker -> x = 1 << 8;	

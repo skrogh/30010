@@ -23,7 +23,7 @@ clock split1;
 clock split2;
 char old;
 
-#pragma interrupt
+#pragma interrupts
 void timer0int() {
 	if ( !main_clock.running )
 		return;

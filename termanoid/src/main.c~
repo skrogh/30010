@@ -20,7 +20,7 @@ void check_collisions() {
 }
 
 void main() {
-	striker_t * striker = create_striker( 40, 24 );
+	striker_t * striker = create_striker( 40, 30 );
 	ball_t * ball = create_ball();
 
 	init_uart( _UART0, _DEFFREQ, _DEFBAUD );

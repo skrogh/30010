@@ -7,5 +7,5 @@
 
 #define true 1
 #define false 0
-enum { BALL, STRIKER, BRICK, POWERUP, HORIZONTAL_BORDER, VERTICAL_BORDER };
+enum { BALL, STRIKER, BRICK, POWERUP };
 #endif

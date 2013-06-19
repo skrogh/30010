@@ -10,7 +10,7 @@ void init_input() {
 
 }
 
-void get_input() {
+unsigned char get_input() {
 	if ( kbhit() )
 		switch( getch() ) {
 		case 'a':

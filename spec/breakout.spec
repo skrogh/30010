@@ -2,7 +2,7 @@
 Arkanoid/breakout clone with multihit and colored brickers.
 Standard reflection from the striker.
 Several levels.
-Beautiful backgrounds.
+Beautiful backgrounds. (ladies)
 Highscores on permanent media.
 More than one life.
 Menu system to show highscores and enable/disable features/modes.

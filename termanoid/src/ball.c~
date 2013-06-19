@@ -4,7 +4,7 @@
 #include "graphics.h" 
 #include "striker.h" 
 #include "math.h"
-
+#include "brick.h"
 #define BALL_GRAPHIC 184
 
 typedef struct tag_internals internals_t;
@@ -32,10 +32,17 @@ void update_ball( ball_t * ball ) {
 	ball -> y += FIX8_8_MULT( sin( (ball -> direction) ), (ball -> speed) );
 }
 
+//uses formula 2*(Vnormal + 90deg ) - Vdirection
 void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 		short other_y, short other_width, short other_height ) {
+	long normal_vector;
+	short old_x = ( (internals_t*)ball -> internals ) -> old_x;
+	short old_y = ( (internals_t*)ball -> internals ) -> old_y;
 	if ( other_ID == STRIKER ) {
-		ball -> direction = 512 - ball -> direction;
+		//ball -> direction = 512 - ball -> direction;
+		//striker acts as a Fresnel lens
+		normal_vector = ((int)128) - ( ( -ball -> x + other_x + ( other_width >> 1 ) ) >> 5 ); 
+		ball -> direction = 256 + normal_vector * 2 - ball -> direction;
 		ball -> x = ( (internals_t*)ball -> internals ) -> old_x + FIX8_8_MULT( cos( ball 
 					-> direction ), ball -> speed );
 		ball -> y = ( (internals_t*)ball -> internals ) -> old_y + FIX8_8_MULT( sin( ball
@@ -43,6 +50,22 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 		return;
 	}
 
+	if ( other_ID == BRICK ) {
+		//figure out which side the ball hits
+		if ( old_y < other_y || old_y > other_y ) {
+			ball -> direction = 512 - ball -> direction;
+			ball -> x = old_x + FIX8_8_MULT( cos( ball -> direction ), ball -> speed );
+			ball -> y = old_y + FIX8_8_MULT( sin( ball -> direction ), ball -> speed );
+		} else {
+			ball -> direction = 256 - ball -> direction;
+			ball -> x = old_x + FIX8_8_MULT( cos( ball -> direction ), ball -> speed );
+			ball -> y = old_y + FIX8_8_MULT( sin( ball -> direction ), ball -> speed );
+		}
+		( (brick_t*)other ) -> collided( (brick_t*)other );
+		( (brick_t*)other ) -> render( (brick_t*)other );
+	}
+
+	//collision with the Y axis borders
 	if ( other_ID == VERTICAL_BORDER ) {
 		ball -> direction = 256 - ball -> direction;
 		ball -> x = ( (internals_t*)ball -> internals ) -> old_x + FIX8_8_MULT( cos( ball
@@ -51,7 +74,8 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 					-> direction ), ball -> speed );
 		return;
 	}
-
+	
+	//collision with the top and bottom border
 	if ( other_ID == HORIZONTAL_BORDER ) {
 		ball -> direction = 512 - ball -> direction;
 		ball -> x = ( (internals_t*)ball -> internals ) -> old_x + FIX8_8_MULT( cos( ball
@@ -66,10 +90,20 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 	short other_x, other_y, other_width, other_height;
 	if ( other_ID == STRIKER ) {
-		other_x = (short)( (striker_t*)other ) -> x << 8;
-		other_y = (short)( (striker_t*)other ) -> y << 8;
+		other_x = (short)( (striker_t*)other ) -> x;
+		other_y = (short)( (striker_t*)other ) -> y;
 		other_width = STRIKER_WIDTH << 8;
 		other_height = 10 << 8;
+	}
+
+	if ( other_ID == BRICK ) {
+		if ( ( (brick_t*)other ) -> lives == 0 )
+			return;
+
+		other_x = ( (brick_t*)other ) -> x;
+		other_y = ( (brick_t*)other ) -> y;
+		other_width = BRICK_WIDTH << 8;
+		other_height = BRICK_HEIGHT << 8;
 	}
 
 	//bounding box collision

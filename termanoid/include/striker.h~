@@ -17,7 +17,7 @@ struct tag_striker {
 	void ( *update )( striker_t * striker );
 };
 
-striker_t * create_striker( char x, char y );
+striker_t * create_striker( short x, short y );
 void destroy_striker( striker_t * striker );
 #endif
 

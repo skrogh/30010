@@ -15,7 +15,7 @@ void setup_joystick() {
 	ADCCTL = 0x90;
 }
 
-char read_joystick_x() {
+unsigned char read_joystick_x() {
 	return ADCD_H;
 }
 

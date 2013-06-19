@@ -26,16 +26,20 @@ void main() {
 	init_uart( _UART0, _DEFFREQ, _DEFBAUD );
 	clrscr();
 	flag = true;
-	setup_timer( 0, (unsigned long)66666, 2, &derphandler );
-
+	setup_input();
+	setup_timer( 0, (unsigned long)60000, 2, &derphandler );
 	while ( 1 ) {
-		get_input();
 		if ( flag ) {
+			get_input();
 			ball -> update( ball );
 			ball -> check_collision( ball, striker, STRIKER );
 			ball -> render( ball );
 			striker -> update( striker );
 			striker -> render( striker );
+			gotoxy( 10, 10 );
+			printf( "      " );
+			gotoxy( 10, 10 );
+			printf( "%d", (unsigned char)inputvalues[ JOYSTICK_X ] );
 			flag = false;
 		}
 	}

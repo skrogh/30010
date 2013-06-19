@@ -1,0 +1,8 @@
+
+#ifndef _JOYSTICK_H
+#define _JOYSTICK_H
+
+void setup_joystick();
+char read_joystick_x();
+
+#endif

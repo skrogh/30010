@@ -1,6 +1,6 @@
 #include <sio.h>
 #include "input.h"
-
+#include "joystick.h"
 #define true 1
 #define false 0
 
@@ -10,7 +10,7 @@ void init_input() {
 
 }
 
-unsigned char get_input() {
+void get_input() {
 	if ( kbhit() )
 		switch( getch() ) {
 		case 'a':
@@ -24,4 +24,10 @@ unsigned char get_input() {
 		default:
 			break;
 		}
+	inputvalues[ JOYSTICK_X ] = read_joystick_x();
+	
+}
+
+void setup_input() {
+	setup_joystick();
 }

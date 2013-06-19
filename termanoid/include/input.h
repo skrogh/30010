@@ -1,8 +1,8 @@
 
 #ifndef _INPUT_H
 #define _INPUT_H
-enum { LEFT, RIGHT };
+enum { LEFT, RIGHT, JOYSTICK_X };
 extern char inputvalues[2];
 void init_input();
-unsigned char get_input();
+void get_input();
 #endif

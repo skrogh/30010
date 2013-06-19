@@ -5,10 +5,10 @@
 typedef struct tag_ball ball_t;
 
 struct tag_ball {
-	char x;
-	char y;
-	char x_velocity;
-	char y_velocity;
+	short x;
+	short y;
+	short speed;
+	int direction; //512 angles
 	void * internals;
 	void (*render)( ball_t * ball );
 	void (*update)( ball_t * ball );

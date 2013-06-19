@@ -5,4 +5,5 @@ enum { LEFT, RIGHT, JOYSTICK_X };
 extern char inputvalues[2];
 void init_input();
 void get_input();
+void setup_input();
 #endif

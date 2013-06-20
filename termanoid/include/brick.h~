@@ -1,8 +1,9 @@
 
 #ifndef _BRICK_H
 #define _BRICK_H
-#define BRICK_GRAPHICS "DURR"
+#define BRICK_GRAPHICS "\xAE\xCD\xCD\xAF"
 #define BRICK_SPACES "    "
+#define BRICK_COLOR 0xC0
 #define BRICK_WIDTH 4
 #define BRICK_HEIGHT 1
 typedef struct tag_brick brick_t;

@@ -6,6 +6,7 @@
 #include "math.h"
 #include "brick.h"
 #define BALL_GRAPHIC 184
+#define BALL_COLOR 0xA0
 
 typedef struct tag_internals internals_t;
 
@@ -18,9 +19,9 @@ void render_ball( ball_t * ball ) {
 	short old_x = ( (internals_t*) ball -> internals ) -> old_x;
 	short old_y = ( (internals_t*) ball -> internals ) -> old_y;
 	gotoxy( (old_x & 0xFF00) >> 8  , ( old_y & 0xFF00 ) >> 8 );
-	draw_char( ' ' );
+	draw_char( ' ', BALL_COLOR );
 	gotoxy( (ball -> x & 0xFF00) >> 8, (ball -> y & 0xFF00) >> 8 );
-	draw_char( BALL_GRAPHIC );
+	draw_char( BALL_GRAPHIC, BALL_COLOR );
 }
 
 void update_ball( ball_t * ball ) {
@@ -29,23 +30,25 @@ void update_ball( ball_t * ball ) {
 	( (internals_t*) ball -> internals ) -> old_x = ball -> x;
 	( (internals_t*) ball -> internals ) -> old_y = ball -> y;
 	ball -> x += FIX8_8_MULT( cos( (ball -> direction) ), (ball -> speed) );
-	ball -> y += FIX8_8_MULT( sin( (ball -> direction) ), (ball -> speed) );
+	ball -> y -= FIX8_8_MULT( sin( (ball -> direction) ), (ball -> speed) );
 }
 
-//uses formula 2*(Vnormal + 90deg ) - Vdirection
+//uses formula 2*(Vnormal + 90deg ) - Vdirection to calculate reflection
 void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 		short other_y, short other_width, short other_height ) {
-	long normal_vector;
+	short normal_vector;
 	short old_x = ( (internals_t*)ball -> internals ) -> old_x;
 	short old_y = ( (internals_t*)ball -> internals ) -> old_y;
 	if ( other_ID == STRIKER ) {
 		//ball -> direction = 512 - ball -> direction;
 		//striker acts as a Fresnel lens
-		normal_vector = ((int)128) - ( ( -ball -> x + other_x + ( other_width >> 1 ) ) >> 5 ); 
-		ball -> direction = 256 + normal_vector * 2 - ball -> direction;
+		normal_vector = ((int)128) + ( ( -ball -> x + other_x + ( ( other_width )
+					   	>> 1 ) ) >> 4 ); 
+		//ball -> direction = 256 + normal_vector * 2 - ball -> direction;
+		ball -> direction = (int)normal_vector;
 		ball -> x = ( (internals_t*)ball -> internals ) -> old_x + FIX8_8_MULT( cos( ball 
 					-> direction ), ball -> speed );
-		ball -> y = ( (internals_t*)ball -> internals ) -> old_y + FIX8_8_MULT( sin( ball
+		ball -> y = ( (internals_t*)ball -> internals ) -> old_y - FIX8_8_MULT( sin( ball
 					-> direction ), ball -> speed );
 		return;
 	}
@@ -55,14 +58,13 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 		if ( old_y < other_y || old_y > other_y ) {
 			ball -> direction = 512 - ball -> direction;
 			ball -> x = old_x + FIX8_8_MULT( cos( ball -> direction ), ball -> speed );
-			ball -> y = old_y + FIX8_8_MULT( sin( ball -> direction ), ball -> speed );
+			ball -> y = old_y - FIX8_8_MULT( sin( ball -> direction ), ball -> speed );
 		} else {
 			ball -> direction = 256 - ball -> direction;
 			ball -> x = old_x + FIX8_8_MULT( cos( ball -> direction ), ball -> speed );
-			ball -> y = old_y + FIX8_8_MULT( sin( ball -> direction ), ball -> speed );
+			ball -> y = old_y - FIX8_8_MULT( sin( ball -> direction ), ball -> speed );
 		}
 		( (brick_t*)other ) -> collided( (brick_t*)other );
-		( (brick_t*)other ) -> render( (brick_t*)other );
 	}
 
 	//collision with the Y axis borders
@@ -70,7 +72,7 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 		ball -> direction = 256 - ball -> direction;
 		ball -> x = ( (internals_t*)ball -> internals ) -> old_x + FIX8_8_MULT( cos( ball
 					-> direction ), ball -> speed );
-		ball -> y = ( (internals_t*)ball -> internals ) -> old_y + FIX8_8_MULT( sin( ball
+		ball -> y = ( (internals_t*)ball -> internals ) -> old_y - FIX8_8_MULT( sin( ball
 					-> direction ), ball -> speed );
 		return;
 	}
@@ -80,7 +82,7 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 		ball -> direction = 512 - ball -> direction;
 		ball -> x = ( (internals_t*)ball -> internals ) -> old_x + FIX8_8_MULT( cos( ball
 					-> direction ), ball -> speed );
-		ball -> y = ( (internals_t*)ball -> internals ) -> old_y + FIX8_8_MULT( sin( ball
+		ball -> y = ( (internals_t*)ball -> internals ) -> old_y - FIX8_8_MULT( sin( ball
 					-> direction ), ball -> speed );
 		return;
 	}
@@ -114,8 +116,8 @@ void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 	}
 
 	//boundary checks
-	if ( ball -> x < ( 1 << 8 ) ) {
-		collided_ball( ball, other, VERTICAL_BORDER, 1 << 8, 1 << 8, 1 << 8, 24 << 8 );
+	if ( ball -> x < ( 2 << 8 ) ) {
+		collided_ball( ball, other, VERTICAL_BORDER, 2 << 8, 1 << 8, 1 << 8, 24 << 8 );
 		return;
 	}
 	else if ( ball -> x > ( SCREEN_WIDTH - 1 ) << 8 ) {
@@ -124,8 +126,8 @@ void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 		return;
 	}
 
-	if ( ball -> y < 1 << 8 ) {
-		collided_ball( ball, other, HORIZONTAL_BORDER, 1 << 8, 1 << 8, SCREEN_WIDTH << 8,
+	if ( ball -> y < 2 << 8 ) {
+		collided_ball( ball, other, HORIZONTAL_BORDER, 1 << 8, 2 << 8, SCREEN_WIDTH << 8,
 			   	1 << 8 );
 		return;
 	}

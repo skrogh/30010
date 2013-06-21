@@ -50,18 +50,18 @@ void render_striker( striker_t * striker ) {
 
 	//else refresh the striker
 	gotoxy( ( striker -> x ) >> 8, ( striker -> y ) >> 8 );
-	draw_chars( STRIKER_GRAPHIC, STRIKER_COLOR );
+	draw_chars_bg( STRIKER_GRAPHIC, STRIKER_COLOR );
 
 	//only erase needed characters
 	if ( old_x > striker -> x ) {
 		short dx = ( old_x >> 8 ) - ( striker -> x >> 8 );
 		for ( i = 0; i < dx; i++ )
-			draw_char( ' ', 0x00 );
+			draw_char_bg( ' ', 0x00 );
 	} else {
 		short dx = ( striker -> x >> 8 )  - ( old_x >> 8 );
 		gotoxy( (old_x >> 8), old_y >> 8 ); 
 		for ( i = 0; i < dx; i++ )
-			draw_char( ' ', 0x00 );
+			draw_char_bg( ' ', 0x00 );
 	}
 
 }

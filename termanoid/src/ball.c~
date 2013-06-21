@@ -5,8 +5,8 @@
 #include "striker.h" 
 #include "math.h"
 #include "brick.h"
-#define BALL_GRAPHIC 184
-#define BALL_COLOR 0xA0
+#define BALL_GRAPHIC 0xB8
+#define BALL_COLOR 0xC8
 
 typedef struct tag_internals internals_t;
 
@@ -19,9 +19,9 @@ void render_ball( ball_t * ball ) {
 	short old_x = ( (internals_t*) ball -> internals ) -> old_x;
 	short old_y = ( (internals_t*) ball -> internals ) -> old_y;
 	gotoxy( (old_x & 0xFF00) >> 8  , ( old_y & 0xFF00 ) >> 8 );
-	draw_char( ' ', BALL_COLOR );
+	draw_char_bg( ' ', BALL_COLOR );
 	gotoxy( (ball -> x & 0xFF00) >> 8, (ball -> y & 0xFF00) >> 8 );
-	draw_char( BALL_GRAPHIC, BALL_COLOR );
+	draw_char_bg( BALL_GRAPHIC, BALL_COLOR );
 }
 
 void update_ball( ball_t * ball ) {
@@ -131,8 +131,8 @@ void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 			   	1 << 8 );
 		return;
 	}
-	else if ( ball -> y > ( ( SCREEN_HEIGHT ) << 8 ) ) {
-		collided_ball( ball, other, HORIZONTAL_BORDER, 1 << 8, ( SCREEN_HEIGHT - 1 ) << 8,
+	else if ( ball -> y > ( ( SCREEN_HEIGHT + 1 ) << 8 ) ) {
+		collided_ball( ball, other, HORIZONTAL_BORDER, 1 << 8, ( SCREEN_HEIGHT ) << 8,
 			   	24 << 8, 1 << 8 );
 		return;
 	}

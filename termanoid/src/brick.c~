@@ -3,12 +3,27 @@
 #include "brick.h"
 #include "graphics.h"
 
+const unsigned char brick_graphic[] = { '\xC9', '\xCD', '\xCD', '\xCD', '\xCD', '\xCD', '\xCD', '\xBB',
+								   '\xC8', '\xCD', '\xCD', '\xCD', '\xCD', '\xCD', '\xCD', '\xBC' };
+
 void render_brick( brick_t * brick ) {
-	gotoxy( brick -> x >> 8, brick -> y >> 8 );
-	if ( brick -> lives != 0 ) 
-		draw_chars( BRICK_GRAPHICS, BRICK_COLOR );
-	else
-		draw_chars( BRICK_SPACES, BRICK_COLOR );
+	char i, j;
+	if ( brick -> lives != 0 ) {
+		for ( i = 0; i < BRICK_HEIGHT; i++ ) {
+			gotoxy( brick -> x >> 8, ( brick -> y >> 8 ) + i );	
+			for( j = 0; j < BRICK_WIDTH; j++ ) {
+				draw_char_bg( brick_graphic[j + i * BRICK_WIDTH ], 
+						( brick -> lives << 4 ) | 0x08 );
+			}
+		}
+	} else {
+		for ( i = 0; i < BRICK_HEIGHT; i++ ) {
+			gotoxy( brick -> x >> 8, ( brick -> y >> 8 ) + i );	
+			for( j = 0; j < BRICK_WIDTH; j++ ) {
+				draw_char_bg( ' ', BRICK_COLOR );
+			}
+		}
+	}
 }
 
 

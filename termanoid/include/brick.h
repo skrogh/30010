@@ -1,11 +1,11 @@
 
 #ifndef _BRICK_H
 #define _BRICK_H
-#define BRICK_GRAPHICS "\xAE\xCD\xCD\xAF"
-#define BRICK_SPACES "    "
+#define BRICK_GRAPHICS "\xAE\xCD\xCD\xCD\xCD\xCD\xCD\xAF"
+#define BRICK_SPACES "        "
 #define BRICK_COLOR 0xC0
-#define BRICK_WIDTH 4
-#define BRICK_HEIGHT 1
+#define BRICK_WIDTH 8
+#define BRICK_HEIGHT 2
 typedef struct tag_brick brick_t;
 
 struct tag_brick {

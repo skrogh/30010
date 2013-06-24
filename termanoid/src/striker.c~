@@ -20,14 +20,14 @@ void update_striker( striker_t * striker ) {
 	
 	//stabilize joystick input
 	joystick_value = (unsigned char)inputvalues[ JOYSTICK_X ];
-	/*if ( joystick_value > 90 && joystick_value < 150 ) {
+	if ( joystick_value > 140 && joystick_value < 210 ) {
 	}
 	else {
 		//new values
-		striker -> x += FIX8_8_MULT( striker -> x_velocity, (char)(joystick_value - 125 ) );
-	}*/
-	striker -> x += striker -> x_velocity * inputvalues[ RIGHT ];
-	striker -> x -= striker -> x_velocity * inputvalues[ LEFT ];
+		striker -> x += FIX8_8_MULT( striker -> x_velocity, (char)(joystick_value - 150 ) );
+	}
+	//striker -> x += striker -> x_velocity * inputvalues[ RIGHT ];
+	//striker -> x -= striker -> x_velocity * inputvalues[ LEFT ];
 
 	//boundary check
 	if (  striker -> x + ( STRIKER_WIDTH << 8 ) > ( SCREEN_WIDTH << 8 ) )

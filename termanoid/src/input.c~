@@ -5,7 +5,7 @@
 #define true 1
 #define false 0
 
-unsigned char inputvalues[2];
+unsigned char inputvalues[4];
 
 void init_input() {
 
@@ -36,10 +36,10 @@ void get_input() {
 	//get joystick input
 	inputvalues[ JOYSTICK_X ] = read_joystick_x();
 	//compensate for extreme joystick values 
-	if ( inputvalues[ JOYSTICK_X ] > 240 )
-		inputvalues[ JOYSTICK_X ] = 240;
-	else if ( inputvalues[ JOYSTICK_X ] < 10 )
-		inputvalues[ JOYSTICK_X ] = 10;
+	if ( inputvalues[ JOYSTICK_X ] > 245 )
+		inputvalues[ JOYSTICK_X ] = 245;
+	else if ( inputvalues[ JOYSTICK_X ] < 55 )
+		inputvalues[ JOYSTICK_X ] = 55;
 }
 
 void setup_input() {

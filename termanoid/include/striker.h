@@ -6,6 +6,7 @@
 #define STRIKER_COLOR 0xD8
 #define STRIKER_WIDTH 8
 #define STRIKER_SPACES "        "
+#define STRIKER_SPAWN_X 36
 typedef struct tag_striker striker_t; //make striker_t known to the compiler
 
 struct tag_striker {

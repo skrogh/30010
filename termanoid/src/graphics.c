@@ -254,6 +254,8 @@ void draw_char_bg( unsigned char symbol, unsigned char _color ) {
 #endif
 	}
 
+
+
 void draw_whole_bg() {
 	unsigned char i, j;
 	for( j = 1; j <= BACKGROUND_HEIGHT; j++ ) {
@@ -270,4 +272,20 @@ void set_monochrome( char truefalse ) {
 
 void set_background( const unsigned char * background ) {
 	currentBg = background;
+}
+
+void draw_borders() {
+	int i;
+	gotoxy( 1, 1 );
+	for ( i = 1; i < SCREEN_WIDTH; i++ ) {
+		draw_char_bg( '=', 0x70 );
+	}
+	for ( i = 1; i <= SCREEN_HEIGHT; i++ ) {
+		gotoxy( SCREEN_WIDTH, i );
+		draw_char_bg( '|', 0x70 );
+	}
+	for ( i = 1; i <= SCREEN_HEIGHT; i++ ) {
+		gotoxy( 1, i );
+		draw_char_bg( '|', 0x70 );
+	} 
 }

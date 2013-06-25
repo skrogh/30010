@@ -6,12 +6,15 @@
 #include "striker.h" 
 #include "math.h"
 #include "brick.h"
+#include "sound.h"
+
 #define BALL_GRAPHIC 0xB8
-#define BALL_COLOR 0xC8
+#define BALL_COLOR 0x28
 #define BRICK_KILL_SCORE 5
 #define BRICK_HIT_SCORE 1
 #define DEATH_SCORE_PENALTY 25
 #define SPAWN_DELAY 50
+#define DEATH_DELAY 5
 #define BALL_START_DIRECTION 128
 #define SCORE_X 5
 #define SCORE_Y 41
@@ -55,11 +58,13 @@ void update_ball( ball_t * ball ) {
 		( (internals_t*)ball -> internals ) -> delay_timer++;
 		if ( ( (internals_t*)ball -> internals ) -> delay_timer > SPAWN_DELAY ) { 
 			ball -> state = ALIVE;
+			( (internals_t*)ball -> internals ) -> delay_timer = 0;
 		}
 
 	} else if ( ball -> state == DEAD ) {
 		( (internals_t*)ball -> internals ) -> delay_timer++;
-		if ( ( (internals_t*)ball -> internals ) -> delay_timer > SPAWN_DELAY ) {
+		if ( ( (internals_t*)ball -> internals ) -> delay_timer > DEATH_DELAY ) {
+			play_sound( 0x03 );
 			ball -> state = SPAWNED;
 			ball -> score -= DEATH_SCORE_PENALTY;
 			update_score( ball );
@@ -90,6 +95,7 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 					-> direction ), ball -> speed );
 		ball -> y = ( (internals_t*)ball -> internals ) -> old_y - FIX8_8_MULT( sin( ball
 					-> direction ), ball -> speed );
+		play_sound( 0x02 );
 		return;
 	}
 
@@ -110,6 +116,8 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 		else 
 			ball -> score += BRICK_HIT_SCORE;
 		update_score( ball );
+		play_sound( 0x01 );
+		return;
 	}
 
 	//collision with the Y axis borders
@@ -119,6 +127,7 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 					-> direction ), ball -> speed );
 		ball -> y = ( (internals_t*)ball -> internals ) -> old_y - FIX8_8_MULT( sin( ball
 					-> direction ), ball -> speed );
+		play_sound( 0x02 );
 		return;
 	}
 	
@@ -129,12 +138,13 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 					-> direction ), ball -> speed );
 		ball -> y = ( (internals_t*)ball -> internals ) -> old_y - FIX8_8_MULT( sin( ball
 					-> direction ), ball -> speed );
+		play_sound( 0x02 );
 		return;
 	}
 	//collision with bottom border decrements score and resets ball
 	else if ( other_ID == BOTTOM_BORDER ) {
 		ball -> state = DEAD;
-		( (internals_t*)ball -> internals ) -> delay_timer = 0;
+		return;
 	}
 
 
@@ -148,10 +158,10 @@ void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 		other_x = (short)( (striker_t*)other ) -> x;
 		other_y = (short)( (striker_t*)other ) -> y;
 		other_width = STRIKER_WIDTH << 8;
-		other_height = 10 << 8;
+		other_height = 1 << 8;
 	}
 
-	if ( other_ID == BRICK ) {
+	else if ( other_ID == BRICK ) {
 		other_lives = ( (brick_t*)other ) -> lives;
 		if ( other_lives == 0 )
 			return;
@@ -161,7 +171,31 @@ void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 		other_width = BRICK_WIDTH << 8;
 		other_height = BRICK_HEIGHT << 8;
 	}
+	
+	//boundary checks
+	else if ( other_ID == ALL_BORDERS ) {
+		if ( ball -> x < ( 2 << 8 ) ) {
+			collided_ball( ball, other, VERTICAL_BORDER, 2 << 8, 1 << 8, 1 << 8, 24 << 8, 0 );
+			return;
+		}
+		else if ( ball -> x > ( SCREEN_WIDTH - 1 ) << 8 ) {
+			collided_ball( ball, other, VERTICAL_BORDER, ( SCREEN_WIDTH -1 ) << 8, 1 << 8,
+				   	1 << 8, 24 << 8, 0 );
+			return;
+		}	
 
+		if ( ball -> y < 2 << 8 ) {
+			collided_ball( ball, other, HORIZONTAL_BORDER, 1 << 8, 2 << 8, SCREEN_WIDTH << 8,
+				   	1 << 8, 0 );
+			return;
+		}
+		//Player misses the ball.
+		else if ( ball -> y > ( ( SCREEN_HEIGHT + 1 ) << 8 ) ) {
+			collided_ball( ball, other, BOTTOM_BORDER, 1 << 8, ( SCREEN_HEIGHT ) << 8,
+				   	24 << 8, 1 << 8, 0 );
+			return;
+		}
+	}
 	//bounding box collision
 	if ( ( ball -> x >= other_x ) && ( ball -> x <= (other_x + other_width) )
 			&& ( ball -> y >= other_y ) && ( ball -> y <= (other_y + other_height) ) ) {
@@ -170,28 +204,7 @@ void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 		return;
 	}
 
-	//boundary checks
-	if ( ball -> x < ( 2 << 8 ) ) {
-		collided_ball( ball, other, VERTICAL_BORDER, 2 << 8, 1 << 8, 1 << 8, 24 << 8, 0 );
-		return;
-	}
-	else if ( ball -> x > ( SCREEN_WIDTH - 1 ) << 8 ) {
-		collided_ball( ball, other, VERTICAL_BORDER, ( SCREEN_WIDTH -1 ) << 8, 1 << 8,
-			   	1 << 8, 24 << 8, 0 );
-		return;
-	}
-
-	if ( ball -> y < 2 << 8 ) {
-		collided_ball( ball, other, HORIZONTAL_BORDER, 1 << 8, 2 << 8, SCREEN_WIDTH << 8,
-			   	1 << 8, 0 );
-		return;
-	}
-	//Player misses the ball.
-	else if ( ball -> y > ( ( SCREEN_HEIGHT + 1 ) << 8 ) ) {
-		collided_ball( ball, other, BOTTOM_BORDER, 1 << 8, ( SCREEN_HEIGHT ) << 8,
-			   	24 << 8, 1 << 8, 0 );
-		return;
-	}
+	
 }
 
 ball_t * create_ball() {

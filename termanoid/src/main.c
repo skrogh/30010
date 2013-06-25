@@ -8,8 +8,15 @@
 #include "brick.h"
 #include "backgrounds.h"
 #include "levels.h"
+#include "sound.h"
+
 #define NUM_BRICKS 15
 #define LEVEL_CHANGE_DELAY 100 
+#define MENU_X 10
+#define MENU_Y 10
+#define MENU_WIDTH 40
+#define MENU_HEIGHT 20
+#define MENU_COLOR 0x20;
 
 char flag;
 enum {SPLASH_SCREEN, MENU, PLAYING, WON_LEVEL };
@@ -19,24 +26,12 @@ void update_handler(void) {
 	flag = true;
 }
 
-void main() {
-	unsigned char i;
-	unsigned char j;
-	unsigned char level_counter = 1;
-	unsigned char brick_counter;
-	unsigned char delay_counter;
-	striker_t * striker = create_striker( STRIKER_SPAWN_X, SCREEN_HEIGHT );
-	ball_t * ball = create_ball();
-	setup_input();
-	setup_timer( 0, (unsigned long)33333, 2, &update_handler );
-
-
-	reset_term();
-	clrscr();
-	game_state = SPLASH_SCREEN;
-	set_background( start_splash );
-	draw_whole_bg();
-
+void display_lost_menu() {
+	draw_box( (unsigned char)MENU_X, (unsigned char)MENU_Y, (unsigned char)MENU_WIDTH, (unsigned char)MENU_HEIGHT, (unsigned char)MENU_COLOR );
+	gotoxy( MENU_X + 4, MENU_Y + 2 );
+	printf( "HERP DERP LOST THE GAME" );
+	gotoxy( MENU_X + 8, MENU_Y + 6 );
+	printf( "Press S to try again" );
 	while ( 1 ) {
 		if ( flag ) {
 			get_input();
@@ -44,16 +39,78 @@ void main() {
 				break;
 		}
 	}
+	cleanup_game();
+	start_game();
 
+}
+
+void display_won_menu( ball_t * ball ) {
+	draw_box( (unsigned char)MENU_X, (unsigned char)MENU_Y, (unsigned char)MENU_WIDTH, (unsigned char)MENU_HEIGHT, (unsigned char)MENU_COLOR );
+	gotoxy( MENU_X + 4, MENU_Y + 2 );
+	printf( "HERP DERP WON THE GAME" );
+	gotoxy( MENU_X + 8, MENU_Y + 6 );
+	printf( "Your final score is: %d", ball -> score );
+	gotoxy( MENU_X + 9, MENU_Y + 8 );
+	printf( "Press S to try again" );
+	while ( 1 ) {
+		if ( flag ) {
+			get_input();
+			if ( inputvalues[ ACTION_BUTTON ] == true )
+				break;
+		}
+	}
+	cleanup_game();
+	start_game();
+}
+
+void update_menu() {
+
+}
+
+void main() {
+	unsigned char i = 0;
+	unsigned char j;
+	unsigned char level_counter = 1;
+	unsigned char brick_counter;
+	unsigned char delay_counter;
+	//allocate striker and ball entities
+	striker_t * striker = create_striker( STRIKER_SPAWN_X, SCREEN_HEIGHT );
+	ball_t * ball = create_ball();
+	
+	//initialize need API functions
+	setup_input();
+	setup_sound();
+	setup_timer( 0, (unsigned long)33333, 2, &update_handler );
+
+	//initialize the terminal
+	reset_term();
+	clrscr();
+
+	//initialize game state
+	game_state = SPLASH_SCREEN;
+	set_background( start_splash );
+	draw_whole_bg();
+	//display splash screen until user continues
+	while ( 1 ) {
+		if ( flag ) {
+			get_input();
+			if ( inputvalues[ ACTION_BUTTON ] == true ) 
+				break;
+		}
+	}
+	
+	//load first level and enter main game loop
 	load_level( level_counter );
 	start_current_level();	
 	game_state = PLAYING;
+
 	while ( 1 ) {
 		if ( flag ) {
 			if ( game_state == PLAYING ) {
 				get_input();
 				ball -> update( ball );
 				ball -> check_collision( ball, striker, STRIKER );
+				ball -> check_collision( ball, ball, ALL_BORDERS );
 				for ( i = 0; i < current_level.num_bricks; i++ ) {
 					ball -> check_collision( ball, bricks[ i ], BRICK );
 				}
@@ -69,6 +126,7 @@ void main() {
 						brick_counter++;
 				}
 				if ( brick_counter == 0 ) { 
+					play_sound( 0x00 );
 					game_state = WON_LEVEL;
 					end_current_level();
 					cleanup_current_level();

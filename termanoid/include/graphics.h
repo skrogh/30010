@@ -26,5 +26,7 @@ void draw_char_bg( unsigned char symbol, unsigned char _color );
 void draw_whole_bg();
 void set_monochrome( char truefalse );
 void set_background( const unsigned char * background );
+void draw_box( unsigned char x, unsigned char y, unsigned char width,
+		unsigned char height, unsigned char _color );
 void draw_borders();
 #endif

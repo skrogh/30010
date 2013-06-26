@@ -1,4 +1,4 @@
-#include <eZ8.h>
+#include <eZ8.h>s
 #include <sio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -8,6 +8,8 @@
 #include "striker.h"
 #include "timekeeping.h"
 #include "ball.h"
+#include "brick.h"
+
 char flag;
 
 

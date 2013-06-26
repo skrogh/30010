@@ -1,9 +1,23 @@
 #include <eZ8.h>
 #include <sio.h>
 #include "graphics.h"
+#include "backgrounds.h"
 
 #define true 1
 #define false 0
+
+//constants for drawing background, 1 indexed
+unsigned char bgx = 1;
+unsigned char bgy = 1;
+unsigned char bgcolor = 0x70;
+
+char monochrome_background = false;
+
+#define BG 0x00
+
+
+
+const unsigned char* currentBg; 
 
 void foreground_color(unsigned char foreground) {
 	/*  Value      foreground     Value     foreground
@@ -49,12 +63,20 @@ Value      Color
 
 void color(unsigned char foreground, unsigned char background) {
 	// combination of fgcolor() and bgcolor() - uses less bandwidth
-	int type = 22;             // normal text
+	int type1 = 22;             // not bold text
+	int type2 = 25;             // not blink text
+	bgcolor = ( foreground << 4 ) | background;
 	if (foreground > 7) {
-		type = 1;                // bold text
+		type1 = 1;                // bold text
 		foreground -= 8;
 	}
-	printf("%c[%d;%d;%dm", ESC, type, foreground+30, background+40);
+	if (background > 7) {
+#ifdef PUTTY
+		type2 = 5;                // bold bg
+#endif
+		background -= 8;
+	}
+	printf("%c[%d;%d;%d;%dm", ESC, type1, type2, foreground+30, background+40);
 }
 
 void resetbgcolor() {
@@ -72,6 +94,8 @@ void clreol() {
 
 void gotoxy( unsigned char x, unsigned char y ) {
 	printf( "%c[%d;%dH", ESC, y, x );
+	bgx = x;
+	bgy = y;
 }
 
 void underline( char on ) {
@@ -95,7 +119,7 @@ void reverse( char on ) {
 		printf( "%c[%dm", ESC, 27 ); // escape code 7 for reverse video
 }
 
-void reset() {
+void reset_term() {
 	printf( "%c[%dm", ESC, 0 ); // underline esc code 0
 }
 
@@ -184,10 +208,68 @@ void window( char x, char y, char width, char height, char* header, char type ) 
 	textType( 28 );
 }
 
-void draw_chars( char * chars ) {
-	printf( "%s", chars );
+void draw_chars_bg( char * chars, unsigned char _color ) {
+	while( *(chars) != '\0' )
+		draw_char_bg( *(chars++), _color );
+
 }
 
-void draw_char( unsigned char symbol ) {
+void draw_char_bg( unsigned char symbol, unsigned char _color ) {
+	
+	if ( symbol == ' ' ) {
+		unsigned short x = bgx - 1;
+		unsigned short y = bgy - 1;
+
+		
+		_color = currentBg[(short)BACKGROUND_WIDTH * (short)BACKGROUND_HEIGHT+ x
+		   	+ (short)BACKGROUND_WIDTH * y];
+		if ( monochrome_background )
+			_color &= 0x88; // only b/w colors
+		else
+			symbol = currentBg[x + (short)BACKGROUND_WIDTH* y];
+	} else {
+		unsigned short x = bgx - 1;
+		unsigned short y = bgy - 1;
+		if ( ( _color & 0x0F ) == 0x08 ) { //ligt black for transparant
+			_color &= 0xF0; // clear bg color
+			_color |= currentBg[(short)BACKGROUND_WIDTH * (short)BACKGROUND_HEIGHT 
+				+ x + (short)BACKGROUND_WIDTH * y] & 0x0F; // set bg color
+			if ( monochrome_background )
+				_color &= 0xF8; // only b/w bg colors
+		}
+	}
+	if ( symbol == ESC )
+		return; // you can't draw that...
+
+	if ( _color != bgcolor )
+		color( _color >> 4, _color & 0x0F );
 	putch( symbol );
+	bgx++;
+#ifdef HYPER_T // do automatic line warp for hyperterminal
+	if ( bgx > SCREEN_WIDTH ) {
+		bgx = 1;
+		bgy++;
+		if ( bgy > BACKGROUND_HEIGHT )
+			bgy = BACKGROUND_HEIGHT;
+#endif
+	}
+
+
+
+void draw_whole_bg() {
+	unsigned char i, j;
+	for( j = 1; j <= BACKGROUND_HEIGHT; j++ ) {
+		gotoxy( 1, j );
+		for( i = 1; i < BACKGROUND_WIDTH; i++ ) {
+			draw_char_bg( ' ', 0x00 );
+		}
+	}
+}
+
+void set_monochrome( char truefalse ) {
+	monochrome_background = ( truefalse == true ) ? true : false;
+}
+
+void set_background( const unsigned char * background ) {
+	currentBg = background;
 }

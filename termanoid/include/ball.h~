@@ -2,11 +2,18 @@
 #ifndef _BALL_H
 #define _BALL_H
 
+#define BALL_SPAWN_X 40
+#define BALL_SPAWN_Y 25
+#define BALL_SPAWN_DIRECTION 128
+#define BALL_SPAWN_SPEED 1
+enum {SPAWNED, ALIVE, DEAD};
 typedef struct tag_ball ball_t;
 
 struct tag_ball {
 	short x;
 	short y;
+	int score;
+	char state;
 	short speed;
 	int direction; //512 angles
 	void * internals;

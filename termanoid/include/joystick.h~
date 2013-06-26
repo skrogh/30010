@@ -3,6 +3,6 @@
 #define _JOYSTICK_H
 
 void setup_joystick();
-char read_joystick_x();
+unsigned char read_joystick_x();
 
 #endif

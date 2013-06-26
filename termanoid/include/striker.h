@@ -3,7 +3,7 @@
 #define _STRIKER_H
 						 
 #define STRIKER_GRAPHIC "\xC9\xDF\xDF\xDF\xDF\xDF\xDF\xBB"
-#define STRIKER_COLOR 0xD8
+#define STRIKER_COLOR 0x28
 #define STRIKER_WIDTH 8
 #define STRIKER_SPACES "        "
 #define STRIKER_SPAWN_X 36

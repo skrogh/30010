@@ -7,7 +7,6 @@ typedef struct tag_level level_t;
 
 struct tag_level {
 	unsigned char num_bricks;
-	unsigned char alive_bricks;
 	const unsigned char * brick_arrangement;
 	const unsigned char ** background; /* zds doesn't compile code with a single 
 										  level of indirection correctly */

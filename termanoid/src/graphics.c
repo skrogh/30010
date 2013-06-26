@@ -208,6 +208,54 @@ void window( char x, char y, char width, char height, char* header, char type ) 
 	textType( 28 );
 }
 
+void draw_box( unsigned char x, unsigned char y, unsigned char width, unsigned char height,
+	   unsigned char _color ) {
+	unsigned char tLeft,	tRight,	lH,	lV, trCorn,	tlCorn,	brCorn,	blCorn;
+	unsigned char i, j;
+	tLeft = 185;
+	tRight = 204;
+	lH = 205;
+	lV = 186;
+	trCorn = 187;
+	tlCorn = 201; 
+	brCorn = 188;
+	blCorn = 200;
+	
+	color( (char)( _color >> 4 ), (char)( _color & 0x0F ) ); 
+	//draw top and bottom edge
+	gotoxy( x, y );
+	draw_char_bg( tlCorn, _color );
+	for ( i = 1; i < width; i++ ) {
+	   draw_char_bg( lH, _color );
+	}
+	draw_char_bg( trCorn, _color );
+	gotoxy( x, y + height );
+	draw_char_bg( blCorn, _color );
+	for( i = 1; i < width; i++ ) {
+		draw_char_bg( lH, _color );
+	}
+	draw_char_bg( brCorn, _color );
+
+	//draw vertical sides
+	for ( i = 1; i < height; i++ ) {
+		gotoxy( x, y + i );
+		draw_char_bg( lV, _color );
+	}
+	for ( i = 1; i < height; i++ ) {
+		gotoxy( x + width, y + i );
+		draw_char_bg( lV, _color );
+	}
+	
+	//fill background with white
+	color( (unsigned char)( _color >> 4 ), 0xF );
+	for ( i = 1; i < width; i++ ) {
+		gotoxy( x + 1, y + i );
+		for ( j = 1; j < height; j++ )
+			putch( ' ' );	
+	}
+
+}
+
 void draw_chars_bg( char * chars, unsigned char _color ) {
 	while( *(chars) != '\0' )
 		draw_char_bg( *(chars++), _color );

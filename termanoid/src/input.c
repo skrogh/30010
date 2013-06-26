@@ -14,6 +14,8 @@ void init_input() {
 void get_input() {
 	//reset inputs that are only valid for one update cycle
 	inputvalues[ ACTION_BUTTON ] = false;
+	inputvalues[ LEFT ] = false;
+	inputvalues[ RIGHT ] = false;
 
 	//get keyboard input
 	if ( kbhit() )

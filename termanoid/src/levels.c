@@ -9,6 +9,7 @@
 level_t current_level;
 brick_t * bricks[MAX_BRICKS];
 
+// Level arrangements [ x_pos, y_pos, lives ]
 const unsigned char arrangement_one[] = { 10, 4, 2, 10 + BRICK_WIDTH, 4, 2,
    	10 + 2*BRICK_WIDTH, 4, 2, 10 + 3 * BRICK_WIDTH, 4, 2, 10 + 4 * BRICK_WIDTH, 4,
    	2, 10 + 5 * BRICK_WIDTH, 4, 2, 10 + 6 * BRICK_WIDTH, 4, 2, 10 + 7 * BRICK_WIDTH, 4, 2 };	

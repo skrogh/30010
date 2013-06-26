@@ -175,12 +175,12 @@ void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 	//boundary checks
 	else if ( other_ID == ALL_BORDERS ) {
 		if ( ball -> x < ( 2 << 8 ) ) {
-			collided_ball( ball, other, VERTICAL_BORDER, 2 << 8, 1 << 8, 1 << 8, 24 << 8, 0 );
+			collided_ball( ball, other, VERTICAL_BORDER, 2 << 8, 1 << 8, 1 << 8, 25 << 8, 0 );
 			return;
 		}
-		else if ( ball -> x > ( SCREEN_WIDTH - 1 ) << 8 ) {
+		else if ( ball -> x > ( SCREEN_WIDTH ) << 8 ) {
 			collided_ball( ball, other, VERTICAL_BORDER, ( SCREEN_WIDTH -1 ) << 8, 1 << 8,
-				   	1 << 8, 24 << 8, 0 );
+				   	1 << 8, 25 << 8, 0 );
 			return;
 		}	
 
@@ -192,13 +192,15 @@ void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 		//Player misses the ball.
 		else if ( ball -> y > ( ( SCREEN_HEIGHT + 1 ) << 8 ) ) {
 			collided_ball( ball, other, BOTTOM_BORDER, 1 << 8, ( SCREEN_HEIGHT ) << 8,
-				   	24 << 8, 1 << 8, 0 );
+				   	25 << 8, 1 << 8, 0 );
 			return;
 		}
 	}
 	//bounding box collision
-	if ( ( ball -> x >= other_x ) && ( ball -> x <= (other_x + other_width) )
-			&& ( ball -> y >= other_y ) && ( ball -> y <= (other_y + other_height) ) ) {
+	if ( (  ( ball -> x >> 8 ) >= ( other_x >> 8 ) )
+			&& ( ( ball -> x >> 8 ) <= ( (other_x + other_width) >> 8 ) )
+			&& (  ( ball -> y >> 8 ) >= ( other_y >> 8 ) )
+		   	&& ( ( ball -> y >> 8 ) <= ( (other_y + other_height) >> 8 ) ) ) {
 		collided_ball( ball, other, other_ID, other_x, other_y, other_width, other_height,
 			   other_lives	);
 		return;

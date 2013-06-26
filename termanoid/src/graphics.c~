@@ -248,9 +248,9 @@ void draw_box( unsigned char x, unsigned char y, unsigned char width, unsigned c
 	
 	//fill background with white
 	color( (unsigned char)( _color >> 4 ), 0xF );
-	for ( i = 1; i < width; i++ ) {
+	for ( i = 1; i < height; i++ ) {
 		gotoxy( x + 1, y + i );
-		for ( j = 1; j < height; j++ )
+		for ( j = 1; j < width; j++ )
 			putch( ' ' );	
 	}
 
@@ -308,7 +308,7 @@ void draw_whole_bg() {
 	unsigned char i, j;
 	for( j = 1; j <= BACKGROUND_HEIGHT; j++ ) {
 		gotoxy( 1, j );
-		for( i = 1; i < BACKGROUND_WIDTH; i++ ) {
+		for( i = 1; i <= BACKGROUND_WIDTH; i++ ) {
 			draw_char_bg( ' ', 0x00 );
 		}
 	}
@@ -329,7 +329,7 @@ void draw_borders() {
 		draw_char_bg( '=', 0x70 );
 	}
 	for ( i = 1; i <= SCREEN_HEIGHT; i++ ) {
-		gotoxy( SCREEN_WIDTH, i );
+		gotoxy( SCREEN_WIDTH , i );
 		draw_char_bg( '|', 0x70 );
 	}
 	for ( i = 1; i <= SCREEN_HEIGHT; i++ ) {

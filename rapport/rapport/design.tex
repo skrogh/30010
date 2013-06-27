@@ -80,7 +80,7 @@ The advantage of object oriented programming is that all game entities can then 
 update and render functions, eliminating the need to change exisiting code when a new game entity is added.
 This also helps to avoid spaghetti code and deep nesting problems. While we are aware that object oriented
 programming usually comes with significant performance overhead and as such is not suitable for a microprocessor,
-we deem this to not be a problem as we do not use truly object oriented style, only an approximate one, where every
+we deem this to not be a problem as we do not a use truly object oriented style, only an approximate one, where every
 entity is represented as a struct with function pointers to its inner "methods" and primitives for fields.
 Only a small amount of glue code is needed to control the transition between levels and manage the game state. \\
 
@@ -90,11 +90,22 @@ as possible, thus making it possible to change the inner workings of a module wi
 As functions and variables in C are confined to their own scope, the file in which they are declared, and this
 scope can only be extended by including them in a header file, our header files are kept as simple as possible. \\
 
-A block diagram of the modules and their communication paths can be seen in figure \ref{architecture_block}
+A block diagram of the modules and their communication paths can be seen in figure \ref{architecture_block}. In the
+diagram, arrows represent in which direction function calls and commands travel, which typically means information
+flows in the opposite direction.
 
 \begin{figure}
 	\center
 	\includegraphics[scale=0.7]{pictures/architecture_block.eps}
 	\caption{Block diagram of the software modules and their communication}
 	\label{architecture_block}
+\end{figure}
+
+A flowchart depicting the top level control flow can be seen in figure \ref{top_flow}.
+
+\begin{figure}
+	\center
+	\includegraphics[scale=0.7]{pictures/top_flow.eps}
+	\caption{Control flow at the top level}
+	\label{top_flow}
 \end{figure}

@@ -3,10 +3,12 @@
 \contentsline {section}{\numberline {2}Analysis}{4}{section.2}
 \contentsline {section}{\numberline {3}Design}{5}{section.3}
 \contentsline {subsection}{\numberline {3.1}Game Design}{5}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Audio module introduction}{6}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}An introduction to subtractive synthesis}{6}{subsubsection.3.2.1}
-\contentsline {subsection}{\numberline {3.3}Audio module analysis}{7}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Audio module design}{8}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}Overview}{8}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}Design of the core modules}{9}{subsubsection.3.4.2}
-\contentsline {subsubsection}{\numberline {3.4.3}Design of the FIFO buffer}{10}{subsubsection.3.4.3}
+\contentsline {subsection}{\numberline {3.2}Software Architecture Design}{5}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Audio module introduction}{8}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}An introduction to subtractive synthesis}{8}{subsubsection.3.3.1}
+\contentsline {subsection}{\numberline {3.4}Audio module analysis}{9}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Audio module design}{10}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {3.5.1}Overview}{10}{subsubsection.3.5.1}
+\contentsline {subsubsection}{\numberline {3.5.2}Design of the core modules}{11}{subsubsection.3.5.2}
+\contentsline {subsubsection}{\numberline {3.5.3}Design of the FIFO buffer}{12}{subsubsection.3.5.3}
+\contentsline {subsection}{\numberline {3.6}Audio module implementation}{13}{subsection.3.6}

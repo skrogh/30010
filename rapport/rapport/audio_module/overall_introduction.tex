@@ -1,0 +1,56 @@
+\subsection{Audio module introduction}
+The audio module will be run as an external application on a \emph{Texas
+Instruments} \emph{Stellaris Launchpad}, communicating with the \emph{eZ8} via
+\emph{SPI}.
+
+The audio module performs the following:
+\begin{itemize}
+  \item Play and stop one song: \emph{Popcorn}
+  \item The song has 3 voices
+  \begin{itemize}
+    \item Lead
+    \item Bass
+    \item Percussion
+  \end{itemize}
+  \item The module connects to the \emph{eZ8} with SPI and receives data as
+  \emph{MIDI} messages.
+  \item The module can play game specific sounds (bleeps when the ball hits
+  anything and similar)
+\end{itemize}
+
+Since this section assumes some known knowledge about synthesizers, a small
+introduction to subtractive synthesis is given in the next section.
+
+\subsubsection{An introduction to subtractive synthesis}
+Subtractive synthesis is one of the very popular methods of creating musical
+notes. A very basic synthesizer is described in figure:~\ref{fig:basicsynth}
+
+\stdfig{0.8}{audiomodule/basicsynth}{Block diagram of a basic
+subtractive synthesizer, with examples of signal waveforms. A
+sequencer is used as the source of notes. Note that the timing
+of the sequencer signal examples is not one scale with the
+rest of the signal examples.}{fig:basicsynth}
+
+A steady stream of pulses enters the sequence and makes it advance through it's
+pattern, here with a pattern length of 5. The sequencer output is used as the
+input of the oscillator to control the frequency of it - this could just as well
+be from a keyborad - The oscillator generates a harmonic rich output that is fed
+into a resonant filter (2 pole lowpass here) to \emph{subtract} harmonics; then
+the filtered signal is fed through an amplifier.
+
+The cutoff frequency of the filter is controlled by the \emph{ADSR}, an acronym
+for \emph{Attack Decay Sustain Release} this works as following:
+\begin{itemize}
+  \item Attack: After a trigger the output rises from 0
+to max at a specified rate.
+  \item Decay: The signal then falls to the sustain level at a specified rate.
+  \item Sustan: As long ad the gate is high, the output is helt at the sustain
+  level.
+  \item Release: Once the gate is low, the output falls back to 0 at a specified
+  rate
+\end{itemize}
+
+The amplitude of the amplifier is controlled by an \emph{AHDSR}, the same as the
+\emph{ADSR}, except a short delay, where the output is held at max - the hold
+phase - is put in between the attack and decay stages.
+ 

@@ -14,9 +14,18 @@ synthesizer, taking inspiration from eg. the free-to-try software
 generators, wave-file players etc.) can be connected to form whole synthesizers.
 See figure:~\ref{fig:synthedit}.
 
+\stdfig{0.8}{audiomodule/synthedit.jpg}{The design of the synthesizers took
+inspiration from the block approach as seen in eg. the free program
+\emph{Synth Edit} }{fig:synthedit}
+%TODO add reference to http://www.soundonsound.com/sos/sep09/articles/vstdiy.htm
+%TODO add reference to
+% http://www.synthedit.com/
+
 This approach allows for both easy programming of the modules, as this becomes
 an highly manageable problem; easy programming of the synthesizers, this is just
 connecting the blocks; and provides an easily expandable and reusable library.
+This also allows for easy programming reusable container modules, eg. a
+standard synthesizer.
 
 Communication is done over SPI, using MIDI (\emph{Musical Instrument Digital
 Interface}) commands. This allows for a MIDI interpreter module, working in
@@ -33,12 +42,28 @@ and wave-player. This is illustrated in figure:~\ref{fig:audioflow}
 \stdfig{0.8}{audiomodule/audioflow}{Block diagram of the audio
 module}{fig:audioflow}
 
+The two red blocks, \emph{raw Synth} and \emph{filter Synth} are the
+synthesisers for the lead voice and the bass voice respectively. These modules
+are application specific.
+
+For the lead voice we create a module called `\emph{RawSynth}, because this only
+contains the bare minimums for a synth: An oscillator with a wave-shaper and a
+\emph{AHDSR} module, controlling the volume. The wave shape is set to a stepped
+saw-wave. See figure:~\ref{fig:rawsynth} for a block diagram.
+
+\stdfig{0.8}{audiomodule/rawsynth}{Block diagram of the RawSynth used for the
+lead voice}{fig:rawsynth}
+
+For the bass voice we choose a synth with a 2-pole resonant state variable
+filter, using the lowpass, doing a downward sweep for a synthy \emph{``dauww''}
+sound. a block diagram for this can be seen in figure:~\ref{fig:filtersynth}.
+This module we name \emph{FilterSynth}, a square wave is chosen for the
+wave table, as this gives a nice tone for the bass (the fundamental is strong
+in a square wave, compared to eg. saw wave)
+
+\stdfig{0.8}{audiomodule/filtersynth}{Block diagram of the FilterSynth used for
+the bass voice}{fig:filtersynth}
 
 
 
-\stdfig{0.8}{audiomodule/synthedit.jpg}{The design of the synthesizers took
-inspiration from the block approach as seen in eg. the free program
-\emph{Synth Edit} }{fig:synthedit}
-%TODO add reference to http://www.soundonsound.com/sos/sep09/articles/vstdiy.htm
-%TODO add reference to
-% http://www.synthedit.com/
+

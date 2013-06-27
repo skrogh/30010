@@ -16,10 +16,7 @@ See figure:~\ref{fig:synthedit}.
 
 \stdfig{0.8}{audiomodule/synthedit.jpg}{The design of the synthesizers took
 inspiration from the block approach as seen in eg. the free program
-\emph{Synth Edit} }{fig:synthedit}
-%TODO add reference to http://www.soundonsound.com/sos/sep09/articles/vstdiy.htm
-%TODO add reference to
-% http://www.synthedit.com/
+\emph{Synth Edit} \cite{SynthEdit}. Image from \cite{SEimg}}{fig:synthedit}
 
 This approach allows for both easy programming of the modules, as this becomes
 an highly manageable problem; easy programming of the synthesizers, this is just
@@ -37,7 +34,7 @@ We decided that the background music should be the 80'es classic
 For this we need three voices, lead, bass and percussion.
 The score is stored in 6 arrays (notes and gate/trigger for each voice) and a
 sequencer goes through this array, giving notes and triggers to the synthesisers
-and wave-player. This is illustrated in figure:~\ref{fig:audioflow} 
+and wave-player. This is illustrated in figure:~\ref{fig:audioflow}
 
 \stdfig{0.8}{audiomodule/audioflow}{Block diagram of the audio
 module}{fig:audioflow}
@@ -91,7 +88,18 @@ The following core modules were designed:
   Has outputs for note: the last note played; trigger: high if the note was
   played in the current frame and playing: indicating if the music should be
   playing or not. Ideally there would be a ``note on'' and ``trigger'' array for
-  every note (127 notes) on every midi channel (8 chnnels) - but this was not
+  every note (127 notes) on every midi channel (8 channels) - but this was not
   optimal for the given processor.
-  \end{itemize}
+\end{itemize}
 
+\subsubsection{Design of the FIFO buffer}
+A general utility structure \emph{FIFOBuffer} is designed, this module has the
+following functions:
+\begin{itemize}
+  \item push: Pushes a data point into the beginning of the FIFO, returns 1 on
+  success and 0 if the buffer is full.
+  \item peak: Get the value of a data point a specified length from the end of
+  the FIFO. Returns 0 if no data point exists here and 1 if it does.
+  \item pop: Pop a data element from the end of the FIFO. Returns 1 if there
+  was an element to pop and 0 if the FIFO is empty.
+\end{itemize}

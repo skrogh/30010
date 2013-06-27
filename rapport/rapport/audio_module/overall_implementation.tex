@@ -1,0 +1,15 @@
+\subsection{Audio module implementation}
+
+The structure of the program deviates a bit from the three layers described in
+\cite{Lect2} on slide 9, there is no application interface layer - as seen in
+figure:~\ref{fig:overview}
+
+\stdfig{0.8}{audiomodule/overview}{Block diagram of overall program
+structure}{fig:overview}
+
+The two main reasons for this is:
+\begin{itemize}
+  \item There are very few functions in this layer - a
+layer more would just be a pass-through layer.
+  \item For testing the application had to be ported to \emph{Windows}
+\end{itemize}

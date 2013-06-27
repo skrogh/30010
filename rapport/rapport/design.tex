@@ -1,0 +1,35 @@
+\section{Design}
+This section covers both game design and software architecture design, as well as the
+design of the individual software modules.
+
+\subsection{Game Design}
+The game is an arkanoid clone and as such it is very simple and follows the general arkanoid formula of destroying
+bricks using a ball that bounces around the screen. The ball will reflect itself off of a brick, wall
+in the top of the playing space as well as two walls bordering the sides of the playing space.
+There is nothing stopping at the bottom of the playing space, except the player controlled striker.
+It is the players objective to control the striker such that the ball is reflected off of it and
+hits all the bricks. Thereby destroying the bricks. \\
+
+In this version of arkanoid, which we will henceforth refer to as Smashing Bricks, the player
+upon starting a game is presented with a splash screen, followed by the first level. The levels
+themselves contain a brick layout that can be changed as well as a monochrome background image.
+Upon completion of the level, the full-color background image is revealed and the player can
+move on to the next level. Once the player reaches the end of the game, the players score
+will be presented and the option to restart the game will be available. \\
+
+The score is incremented by a set amount every time a brick is hit or destroyed. If the player
+misses the ball, another amount is subtracted from the score. If the players score goes below
+0, the game is over and the player will have the option to restart the game. \\
+
+The balls reflection from the striker is not actually a reflection, instead the direction
+of the ball is changed according to where it hit the striker. As with all games, these
+mechanics are based on their feeling and this to us felt like the most natural way to play.
+Similarly the speed of the ball and striker are also based on feel. \\
+
+Background music will play and sound effects are triggered every time the ball is reflected
+from a brick, a wall or the striker. \\
+
+The game only has a single difficulty, hard, this is due to the fact that we deemed slow and/or
+easy arkanoid games to get boring too quickly. The game is therefore deliberately designed to 
+force the player to quickly be able to estimate where the ball will reach the bottom again, as 
+soon as it leaves the striker.

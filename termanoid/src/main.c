@@ -1,3 +1,4 @@
+
 #include <sio.h>
 #include "graphics.h"
 #include "constants.h"
@@ -6,6 +7,7 @@
 #include "timekeeping.h"
 #include "ball.h"
 #include "brick.h"
+
 #include "backgrounds.h"
 #include "levels.h"
 #include "sound.h"
@@ -17,6 +19,7 @@
 #define MENU_WIDTH 40
 #define MENU_HEIGHT 20
 #define MENU_COLOR 0x20
+
 
 char flag;
 enum {SPLASH_SCREEN, MENU, PLAYING, WON_LEVEL, LOST_GAME, WON_GAME };

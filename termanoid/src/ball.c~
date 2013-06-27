@@ -200,7 +200,7 @@ void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 	if ( (  ( ball -> x >> 8 ) >= ( other_x >> 8 ) )
 			&& ( ( ball -> x >> 8 ) <= ( (other_x + other_width) >> 8 ) )
 			&& (  ( ball -> y >> 8 ) >= ( other_y >> 8 ) )
-		   	&& ( ( ball -> y >> 8 ) <= ( (other_y + other_height) >> ) ) ) {
+		   	&& ( ( ball -> y >> 8 ) <= ( (other_y + other_height) >> 8 ) ) ) {
 		collided_ball( ball, other, other_ID, other_x, other_y, other_width, other_height,
 			   other_lives	);
 		return;

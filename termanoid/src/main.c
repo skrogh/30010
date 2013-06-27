@@ -30,7 +30,7 @@ void update_handler(void) {
 void start_game( striker_t ** striker, ball_t ** ball ) {
 	*striker = create_striker( STRIKER_SPAWN_X, SCREEN_HEIGHT );
 	*ball = create_ball();
-	load_level( 1 );
+	load_level( 5 );
 	start_current_level();	
 	game_state = PLAYING;
 }
@@ -43,7 +43,7 @@ void end_game( striker_t ** striker, ball_t ** ball ) {
 void display_lost_message() {
 	draw_box( (unsigned char)MENU_X, (unsigned char)MENU_Y, (unsigned char)MENU_WIDTH, (unsigned char)MENU_HEIGHT, (unsigned char)MENU_COLOR );
 	gotoxy( MENU_X + 4, MENU_Y + 2 );
-	printf( "HERP DERP LOST THE GAME" );
+	printf( "You lost the game" );
 	gotoxy( MENU_X + 8, MENU_Y + 6 );
 	printf( "Press S to try again" );
 	while ( 1 ) {
@@ -59,7 +59,7 @@ void display_lost_message() {
 void display_won_message( ball_t * ball ) {
 	draw_box( (unsigned char)MENU_X, (unsigned char)MENU_Y, (unsigned char)MENU_WIDTH, (unsigned char)MENU_HEIGHT, (unsigned char)MENU_COLOR );
 	gotoxy( MENU_X + 4, MENU_Y + 2 );
-	printf( "HERP DERP WON THE GAME" );
+	printf( "Congrats, you won the game" );
 	gotoxy( MENU_X + 8, MENU_Y + 6 );
 	printf( "Your final score is: %d", ball -> score );
 	gotoxy( MENU_X + 9, MENU_Y + 8 );
@@ -136,14 +136,14 @@ void main() {
 						brick_counter++;
 				}
 				if ( brick_counter == 0  ) { 
-					play_sound( 0x00 );
+					play_sound( WINNING_SOUND );
 					game_state = WON_LEVEL;
 					end_current_level();
 					cleanup_current_level();
 					ball -> x = BALL_SPAWN_X << 8;
 					ball -> y = BALL_SPAWN_Y << 8;
 					ball -> direction = BALL_SPAWN_DIRECTION;
-					striker -> x = STRIKER_SPAWN_X;
+					striker -> x = STRIKER_SPAWN_X << 8;
 					level_counter++;
 				}
 			   if ( ball -> score < 0 ) {

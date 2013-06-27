@@ -64,7 +64,7 @@ void update_ball( ball_t * ball ) {
 	} else if ( ball -> state == DEAD ) {
 		( (internals_t*)ball -> internals ) -> delay_timer++;
 		if ( ( (internals_t*)ball -> internals ) -> delay_timer > DEATH_DELAY ) {
-			play_sound( 0x03 );
+			play_sound( DEATH_SOUND );
 			ball -> state = SPAWNED;
 			ball -> score -= DEATH_SCORE_PENALTY;
 			update_score( ball );
@@ -95,7 +95,7 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 					-> direction ), ball -> speed );
 		ball -> y = ( (internals_t*)ball -> internals ) -> old_y - FIX8_8_MULT( sin( ball
 					-> direction ), ball -> speed );
-		play_sound( 0x02 );
+		play_sound( STRIKER_COLLISION_SOUND );
 		return;
 	}
 
@@ -116,7 +116,7 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 		else 
 			ball -> score += BRICK_HIT_SCORE;
 		update_score( ball );
-		play_sound( 0x01 );
+		play_sound( BRICK_COLLISION_SOUND );
 		return;
 	}
 
@@ -127,7 +127,7 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 					-> direction ), ball -> speed );
 		ball -> y = ( (internals_t*)ball -> internals ) -> old_y - FIX8_8_MULT( sin( ball
 					-> direction ), ball -> speed );
-		play_sound( 0x02 );
+		play_sound( BORDER_COLLISION_SOUND );
 		return;
 	}
 	
@@ -138,7 +138,7 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 					-> direction ), ball -> speed );
 		ball -> y = ( (internals_t*)ball -> internals ) -> old_y - FIX8_8_MULT( sin( ball
 					-> direction ), ball -> speed );
-		play_sound( 0x02 );
+		play_sound( BORDER_COLLISION_SOUND );
 		return;
 	}
 	//collision with bottom border decrements score and resets ball

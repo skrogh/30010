@@ -1,7 +1,7 @@
 #ifndef _LEVELS_H
 #define _LEVELS_H
 
-#define NUM_LEVELS 1
+#define NUM_LEVELS 5
 
 typedef struct tag_level level_t;
 

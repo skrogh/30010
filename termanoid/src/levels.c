@@ -56,11 +56,11 @@ const unsigned char arrangement_five[] = { 10, 4, 3, 10 + BRICK_WIDTH, 4, 16,
    	6 + 2 * BRICK_HEIGHT, 18, 10 + 7 * BRICK_WIDTH, 6 + 2 * BRICK_HEIGHT, 18 };
 
 
-const level_t level_one = { 8, arrangement_one, &background_1};
-const level_t level_two = { 16, arrangement_two, &background_2 };
-const level_t level_three = { 12, arrangement_three, &background_3 };
-const level_t level_four = { 24, arrangement_four, &background_4 };
-const level_t level_five = { 24, arrangement_five, &background_5 };
+const level_t level_one = { 8, arrangement_one, &background_1}; //8 bricks
+const level_t level_two = { 16, arrangement_two, &background_2 }; //16 bricks
+const level_t level_three = { 12, arrangement_three, &background_3 }; //12 bricks
+const level_t level_four = { 24, arrangement_four, &background_4 }; //24 bricks
+const level_t level_five = { 24, arrangement_five, &background_5 }; //24 bricks
 
 void load_level( char level ) {
 	switch ( level ) {

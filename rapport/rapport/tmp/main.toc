@@ -1,2 +1,8 @@
 \select@language {english}
-\contentsline {subsection}{\numberline {0.1}Audio module analysis}{3}{subsection.0.1}
+\contentsline {section}{\numberline {1}Specification}{3}{section.1}
+\contentsline {section}{\numberline {2}Analysis}{4}{section.2}
+\contentsline {section}{\numberline {3}Design}{5}{section.3}
+\contentsline {subsection}{\numberline {3.1}Game Design}{5}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Audio module analysis}{6}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Audio module design}{7}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}}{7}{subsubsection.3.3.1}

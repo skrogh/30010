@@ -1,1 +1,35 @@
 \subsection{Audio module analysis}
+The audio generation is very processor heavy - if more than monophonic
+bleeps are desired that is. - To produce alias free audio in the full audible
+range, the output has to be updated more than 40000 times a second.
+Therefore this task is moved from the \emph{eZ8} to a \emph{Texas
+Instruments} \emph{Stellaris Launchpad}, an evaluation-board for the 80MHz
+\emph{ARM Cortex-4M} \emph{LM4F120H5QR} chip.
+%TODO tilføj link til http://www.ti.com/tool/EK-LM4F120XL
+
+The \emph{LM4F120H5QR} is ideal as:
+\begin{itemize}
+  \item It has 64kB of FLASH memory, enough for a medium-size program and small
+  wave-files;
+  \item 32 bit fixed point processor, providing a solid frame for fast and
+  precise generative sound synthesis;
+  \item build in PWM module that width some external filtering can be used a a
+  digital to analog converter, removing the need for an external ADC. Furthermore
+  the output is powerful enough to drive small headphones at low volumes.
+  \item We have past experience with the processor and associated tools, thus
+  the time cost can be reduced by choosing this solution over another.
+  
+\end{itemize}
+
+As the audio module has to play both a piece of music and sound-effects; a mix
+of generated sounds and playback of wave-files is chosen.
+
+The use of generated music cuts down the space a huge wave-file would take. 10s
+of 8bit data at 44kHz is 0.44MB, we can't fit that in the 64kB FLASH of the
+\emph{LM4F120}. On the other hand even at 80MHz speech synthesis becomes
+troublesome, but if speech is re-sampled to ~10kHz it is still possible to make
+out words. Percussion sounds can also be put in down-sampled wave-files, as
+aliasing artifacts aren't a huge sacrifice when dealing with short, rhythmic
+outbursts.
+
+

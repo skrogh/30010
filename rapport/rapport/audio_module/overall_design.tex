@@ -1,0 +1,36 @@
+\subsection{Audio module design}
+
+As described under the analysis, the audio module has to be capable of both
+generating sounds and playing predefined wave-files. The processor is chosen to
+run in real-time with a frequency of 44kHz, this is done to reduce aliasing
+artifacts - in theory this is enough to allow an output spanning the full
+audible range, given sufficient filtering and taking care not to generating any
+tones above the nyquist-frequency; we did however not have the time to dive
+fully into this theory and thus some aliasing will occur.
+
+The design of the audio module will be done like a digital model of a modular
+synthesizer, taking inspiration from eg. the free-to-try software
+\emph{SynthEdit0} in which different block (oscillators, filters, transient
+generators, wave-file players etc.) can be connected to form whole synthesizers.
+See figure:~\ref{fig:synthedit}.
+
+This approach allows for both easy programming of the modules, as this becomes
+an highly manageable problem; easy programming of the synthesizers, this is just
+connecting the blocks; and provides an easily expandable and reusable library.
+
+Communication is done over SPI, using MIDI (\emph{Musical Instrument Digital
+Interface}) commands. This allows for a MIDI interpreter module, working in
+similar ways as all other modules.
+
+\subsubsection{}
+
+
+
+
+
+\stdfig{0.8}{audiomodule/synthedit.jpg}{The design of the synthesizers took
+inspiration from the block approach as seen in eg. the free program
+\emph{Synth Edit} }{fig:synthedit}
+%TODO add reference to http://www.soundonsound.com/sos/sep09/articles/vstdiy.htm
+%TODO add reference to
+% http://www.synthedit.com/

@@ -74,7 +74,7 @@ game situation is updated. This means getting input from the user and  updating 
 , checking collisions and reacting accordingly etc. When this is done, the new situation is presented to the
  user by updating the graphics medium, in this case a terminal. The cycle then repeats until the game
 ends. This can be split into 3 distinct operations that need to be performed within the main game loop:
-Get input, update, render. \\
+Get input, update, render. This will be done at the standard 30 frames per second \\
 
 The advantage of object oriented programming is that all game entities can then contain their own
 update and render functions, eliminating the need to change exisiting code when a new game entity is added.
@@ -92,7 +92,9 @@ scope can only be extended by including them in a header file, our header files 
 
 A block diagram of the modules and their communication paths can be seen in figure \ref{architecture_block}. In the
 diagram, arrows represent in which direction function calls and commands travel, which typically means information
-flows in the opposite direction.
+flows in the opposite direction. The blcok diagram also shows that the only modules with interdependencies are
+the core entities. This shows that the design is highly flexible and modular, since modules can be changed without 
+unexpected side effects. \\
 
 \begin{figure}
 	\center
@@ -101,7 +103,9 @@ flows in the opposite direction.
 	\label{architecture_block}
 \end{figure}
 
-A flowchart depicting the top level control flow can be seen in figure \ref{top_flow}.
+A flowchart depicting the top level control flow can be seen in figure \ref{top_flow}. The cleanup level post clears
+the current level of entities that are no longer needed and the start new level post loads a new level and starts
+ the game in the new level. \\
 
 \begin{figure}
 	\center
@@ -109,3 +113,98 @@ A flowchart depicting the top level control flow can be seen in figure \ref{top_
 	\caption{Control flow at the top level}
 	\label{top_flow}
 \end{figure}
+
+\clearpage
+
+It is now possible to derive the functions that each module must contain. For the hardware layer this is seen
+in figure \ref{hw_modules}. \\
+
+\begin{figure}
+	\center
+	\begin{minipage}[t]{0.3\linewidth}
+		SPI module
+		\begin{itemize}
+			\item setup\_SPI\_master(), set up the eZ8 as an SPI master.
+			\item write\_spi(), write data over the SPI
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[t]{0.3\linewidth}
+		Timerlib
+		\begin{itemize}
+			\item set\_timer(), set up an interrupt pointing to a function passed to it.
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[t]{0.3\linewidth}
+		ADC input
+		\begin{itemize}
+			\item setup\_joystick(), enable the adc pins on which the joystick is located.
+			\item read\_joystick()
+		\end{itemize}
+	\end{minipage}
+	\caption{Hardware layer module functionality}
+	\label{hw_modules}
+\end{figure}
+
+Note that currently the timerlib can only set up TIMER0, since this is all that we deemed necessary. However, the calling
+chain from the application layer supports addition of more timers being enabled by timerlib. \\
+
+The modules in the API layer will need the functionality seen in figure \ref{api_modules}. 
+
+\begin{figure}
+	\center
+	\begin{minipage}[t]{\columnwidth}
+		\begin{minipage}[t]{0.3\linewidth}
+			Input module
+			\begin{itemize}
+				\item setup\_input(), initialize everything needed for getting input.
+				\item get\_input(), poll inputs and update the input state.
+			\end{itemize}
+		\end{minipage}
+		\begin{minipage}[t]{0.3\linewidth}
+			Math
+			\begin{itemize}
+				\item sin()/cos() cosine and sine functions (512 degree system).
+				\item Fixed point multiplication and division macros.
+			\end{itemize}
+		\end{minipage}
+		\begin{minipage}[t]{0.3\linewidth}
+			Sound
+			\begin{itemize}
+				\item setup\_sound(), enable needed functionality for playing sound.
+				\item play\_sound(), play a particular sound taken as an argument.
+			\end{itemize}
+		\end{minipage}
+	\end{minipage}
+	\vspace{1 cm}
+	\begin{minipage}[b]{\columnwidth}
+		\begin{minipage}[t]{0.5\linewidth}
+			Graphics
+			\begin{itemize}
+				\item gotoxy(), terminal cursor placement.
+				\item clrscr(), clear the terminal.
+				\item background\_color(), change the background color.
+				\item foreground\_color().
+				\item color(), change foreground and background simultanously.
+				\item draw\_chars\_bg(), draw character string on top of a background image.
+				\item draw\_char\_bg(), draw single character.
+				\item draw\_whole\_bg(), draw the entire current background.
+				\item set\_monochrome(), set the global monochrome variable
+				\item set\_background(), set the current background.
+				\item draw\_box(), draw a box with a white center for text.
+				\item draw\_borders(), draw borders at the terminal edges.
+			\end{itemize}
+		\end{minipage}
+		\begin{minipage}[t]{0.5\linewidth}
+			Timekeeping
+			\begin{itemize}
+				\item setup\_timer(), set up a timer with a given period and interrupt function, 
+						also supports chosing which timer to use although this is not currently supported
+						in the hardware library.
+			\end{itemize}
+		\end{minipage}
+	\end{minipage}
+	\caption{API layer functionality, only methods presented to the application layer.}
+	\label{api_modules}
+\end{figure}
+
+It is now possible to implement the main game using this design.

@@ -1,5 +1,3 @@
-#include <eZ8.h>
-#include <sio.h>
 #include "timekeeping.h"
 #include "constants.h"
 #include "timerlib.h"

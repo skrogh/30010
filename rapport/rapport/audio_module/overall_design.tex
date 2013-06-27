@@ -55,7 +55,7 @@ saw-wave. See figure:~\ref{fig:rawsynth} for a block diagram.
 lead voice}{fig:rawsynth}
 
 For the bass voice we choose a synth with a 2-pole resonant state variable
-filter, using the lowpass, doing a downward sweep for a synthy \emph{``dauww''}
+filter, using the low-pass, doing a downward sweep for a synthy \emph{``dauww''}
 sound. a block diagram for this can be seen in figure:~\ref{fig:filtersynth}.
 This module we name \emph{FilterSynth}, a square wave is chosen for the
 wave table, as this gives a nice tone for the bass (the fundamental is strong
@@ -64,6 +64,34 @@ in a square wave, compared to eg. saw wave)
 \stdfig{0.8}{audiomodule/filtersynth}{Block diagram of the FilterSynth used for
 the bass voice}{fig:filtersynth}
 
-
-
+\subsubsection{Design of the core modules}
+The following core modules were designed:
+\begin{itemize}
+  \item VCO: A basic oscillator with an input for the note to play and a saw
+  wave output, no bandwidth limiting.
+  \item LFO: A basic low frequency oscillator with a saw wave output and a
+  \emph{tick} output, a delta function once every cycle.
+  \item Sequencer: A sequencer, takes an array and turns it into a sequence -
+  outputting each element in the array one at a time. The sequencer advances
+  when the tick input is high and resets when the reset is high. The sequencer
+  also has an output producing a delta function when looping around.
+  \item LowPass: A simple 1-pole \emph{IIR} low-pass filter. Has an input for
+  the signal and filter coefficient. This module was not used in the final product.
+  \item SVF: A 2-pole resonant state variable filter. Has inputs for signal,
+  filter coefficient, damping coefficient and outputs for hi-pass, band-pass and
+  low-pass.
+  \item AHDSR: \emph{Attack Hold Decay Sustain Release} module as described in
+  section \ref{synthxp}. Has inputs for trigger, gate and the 5 parameters. only
+  has one output.
+  \item WaveShaper: A module capable of turning a saw wave from the VCO into any
+  wave-shape - provided this wave-shape is given in an array. Can also perform
+  bandwidth-limited wave-shaping if the supplied array supports it.
+  \item MidiInterpreter: A module capable of reading from a FIFO (\emph{First
+  In First Out}, as opposed to a stack) buffer and interpreting these signals.
+  Has outputs for note: the last note played; trigger: high if the note was
+  played in the current frame and playing: indicating if the music should be
+  playing or not. Ideally there would be a ``note on'' and ``trigger'' array for
+  every note (127 notes) on every midi channel (8 chnnels) - but this was not
+  optimal for the given processor.
+  \end{itemize}
 

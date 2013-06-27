@@ -8,3 +8,4 @@
 \contentsline {subsection}{\numberline {3.3}Audio module analysis}{7}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}Audio module design}{8}{subsection.3.4}
 \contentsline {subsubsection}{\numberline {3.4.1}Overview}{8}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}Design of the core modules}{9}{subsubsection.3.4.2}

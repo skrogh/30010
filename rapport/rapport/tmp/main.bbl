@@ -1,19 +1,54 @@
 \begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
 
 \bibitem{Stellaris}
-Texas Instruments.
-\newblock Stellaris\textregistered lm4f120 launchpad evaluation kit, 6 2013.
+\BIBentryALTinterwordspacing
+T.~Instruments, ``Stellaris\textregistered lm4f120 launchpad evaluation kit,''
+  June 2013. [Online]. Available: \url{http://www.ti.com/tool/EK-LM4F120XL}
+\BIBentrySTDinterwordspacing
 
-\bibitem{Nobody06}
-Nobody Jr.
-\newblock My article, 2006.
+
+\bibitem{writewav}
+\BIBentryALTinterwordspacing
+K.~Karplus, ``Making wav files from c programs,'' october 2011. [Online].
+  Available:
+  \url{http://karplus4arduino.wordpress.com/2011/10/08/making-wav-files-from-c-programs/}
+\BIBentrySTDinterwordspacing
+
 
 \bibitem{SynthEdit}
-Jeff McClintock.
-\newblock Synth edit homepage, 6 2013.
+\BIBentryALTinterwordspacing
+J.~McClintock, ``Synth edit homepage,'' June 2013. [Online]. Available:
+  \url{http://www.synthedit.com}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Lect2}
+J.~Merayo, ``Programming project - course 30010, lecture 02,'' June 2013.
+
 
 \bibitem{SEimg}
-Nick Storr.
-\newblock Vst diy, 6 2013.
+\BIBentryALTinterwordspacing
+N.~Storr, ``Vst diy,'' June 2013. [Online]. Available:
+  \url{http://www.soundonsound.com/sos/sep09/articles/vstdiy.htm}
+\BIBentrySTDinterwordspacing
+
 
 \end{thebibliography}

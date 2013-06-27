@@ -7,9 +7,6 @@
 
 unsigned char inputvalues[4];
 
-void init_input() {
-
-}
 
 void get_input() {
 	//reset inputs that are only valid for one update cycle

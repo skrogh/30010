@@ -64,7 +64,7 @@ void update_ball( ball_t * ball ) {
 	} else if ( ball -> state == DEAD ) {
 		( (internals_t*)ball -> internals ) -> delay_timer++;
 		if ( ( (internals_t*)ball -> internals ) -> delay_timer > DEATH_DELAY ) {
-			play_sound( 0x03 );
+			play_sound( DEATH_SOUND );
 			ball -> state = SPAWNED;
 			ball -> score -= DEATH_SCORE_PENALTY;
 			update_score( ball );
@@ -95,7 +95,7 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 					-> direction ), ball -> speed );
 		ball -> y = ( (internals_t*)ball -> internals ) -> old_y - FIX8_8_MULT( sin( ball
 					-> direction ), ball -> speed );
-		play_sound( 0x02 );
+		play_sound( STRIKER_COLLISION_SOUND );
 		return;
 	}
 
@@ -116,7 +116,7 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 		else 
 			ball -> score += BRICK_HIT_SCORE;
 		update_score( ball );
-		play_sound( 0x01 );
+		play_sound( BRICK_COLLISION_SOUND );
 		return;
 	}
 
@@ -127,7 +127,7 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 					-> direction ), ball -> speed );
 		ball -> y = ( (internals_t*)ball -> internals ) -> old_y - FIX8_8_MULT( sin( ball
 					-> direction ), ball -> speed );
-		play_sound( 0x02 );
+		play_sound( BORDER_COLLISION_SOUND );
 		return;
 	}
 	
@@ -138,7 +138,7 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 					-> direction ), ball -> speed );
 		ball -> y = ( (internals_t*)ball -> internals ) -> old_y - FIX8_8_MULT( sin( ball
 					-> direction ), ball -> speed );
-		play_sound( 0x02 );
+		play_sound( BORDER_COLLISION_SOUND );
 		return;
 	}
 	//collision with bottom border decrements score and resets ball
@@ -175,12 +175,12 @@ void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 	//boundary checks
 	else if ( other_ID == ALL_BORDERS ) {
 		if ( ball -> x < ( 2 << 8 ) ) {
-			collided_ball( ball, other, VERTICAL_BORDER, 2 << 8, 1 << 8, 1 << 8, 24 << 8, 0 );
+			collided_ball( ball, other, VERTICAL_BORDER, 2 << 8, 1 << 8, 1 << 8, 25 << 8, 0 );
 			return;
 		}
-		else if ( ball -> x > ( SCREEN_WIDTH - 1 ) << 8 ) {
+		else if ( ball -> x > ( SCREEN_WIDTH ) << 8 ) {
 			collided_ball( ball, other, VERTICAL_BORDER, ( SCREEN_WIDTH -1 ) << 8, 1 << 8,
-				   	1 << 8, 24 << 8, 0 );
+				   	1 << 8, 25 << 8, 0 );
 			return;
 		}	
 
@@ -192,13 +192,15 @@ void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 		//Player misses the ball.
 		else if ( ball -> y > ( ( SCREEN_HEIGHT + 1 ) << 8 ) ) {
 			collided_ball( ball, other, BOTTOM_BORDER, 1 << 8, ( SCREEN_HEIGHT ) << 8,
-				   	24 << 8, 1 << 8, 0 );
+				   	25 << 8, 1 << 8, 0 );
 			return;
 		}
 	}
 	//bounding box collision
-	if ( ( ball -> x >= other_x ) && ( ball -> x <= (other_x + other_width) )
-			&& ( ball -> y >= other_y ) && ( ball -> y <= (other_y + other_height) ) ) {
+	if ( (  ( ball -> x >> 8 ) >= ( other_x >> 8 ) )
+			&& ( ( ball -> x >> 8 ) <= ( (other_x + other_width) >> 8 ) )
+			&& (  ( ball -> y >> 8 ) >= ( other_y >> 8 ) )
+		   	&& ( ( ball -> y >> 8 ) <= ( (other_y + other_height) >> 8 ) ) ) {
 		collided_ball( ball, other, other_ID, other_x, other_y, other_width, other_height,
 			   other_lives	);
 		return;

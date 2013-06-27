@@ -74,7 +74,7 @@ game situation is updated. This means getting input from the user and  updating 
 , checking collisions and reacting accordingly etc. When this is done, the new situation is presented to the
  user by updating the graphics medium, in this case a terminal. The cycle then repeats until the game
 ends. This can be split into 3 distinct operations that need to be performed within the main game loop:
-Get input, update, render. \\
+Get input, update, render. This will be done at the standard 30 frames per second \\
 
 The advantage of object oriented programming is that all game entities can then contain their own
 update and render functions, eliminating the need to change exisiting code when a new game entity is added.
@@ -92,7 +92,7 @@ scope can only be extended by including them in a header file, our header files 
 
 A block diagram of the modules and their communication paths can be seen in figure \ref{architecture_block}. In the
 diagram, arrows represent in which direction function calls and commands travel, which typically means information
-flows in the opposite direction.
+flows in the opposite direction. \\
 
 \begin{figure}
 	\center

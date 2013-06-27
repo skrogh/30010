@@ -22,8 +22,16 @@ Communication is done over SPI, using MIDI (\emph{Musical Instrument Digital
 Interface}) commands. This allows for a MIDI interpreter module, working in
 similar ways as all other modules.
 
-\subsubsection{}
+\subsubsection{Overview}
+We decided that the background music should be the 80'es classic
+\emph{Popcorn}.
+For this we need three voices, lead, bass and percussion.
+The score is stored in 6 arrays (notes and gate/trigger for each voice) and a
+sequencer goes through this array, giving notes and triggers to the synthesisers
+and wave-player. This is illustrated in figure:~\ref{fig:audioflow} 
 
+\stdfig{0.8}{audiomodule/audioflow}{Block diagram of the audio
+module}{fig:audioflow}
 
 
 

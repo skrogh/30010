@@ -8,35 +8,29 @@
  
 
 
-%TODO abstract
 \include{abstract}
 \include{resume}
-%TODO resumé
 %TODO whodunnit
 \clearpage
 \tableofcontents
-%TODO problemdecription
-%introduction
-	\include{introduction}
-%specifications
+
+\include{introduction}
 \include{specification}
-%overall analysis
 \include{analysis_top}
-%design top
 \include{design}
 
-%%TODO Gaming units
+%% Gaming units
 
-	%TODO analysis 
-	%TODO desing
-	%TODO implementation
 	\include{implementation_game}
 	\include{tests_game}
 
-	%TODO result
 
 % %Audio unit
-	\include{audio_module/overall_introduction}
+\section{The audio module}
+%baad stlye i know..
+As the audio module is a somewhat independent module, the analysis and design
+of the module has a section of its own.
+ 	\include{audio_module/overall_introduction}
 	%analysis 
 	\include{audio_module/overall_analysis}
 	%desing
@@ -47,10 +41,7 @@
 	\include{audio_module/test_results}
 	
 	
-%%TODO Display unit (PuTTy)
-	
-	%TODO analysis
-%tests?
+
 
 %result?
 	\include{results_game}

@@ -1,3 +1,13 @@
 \subsection{Implementation of main function}
 
-The modules can now be connected as described under the \emph{Design} section  
+The modules can now be connected as described under the \emph{Design} section.
+The trigger signal is gated by the \emph{LFO} tick before entering the
+\emph{OmeShotter}s. A flow diagram for the main function is presented in
+figure~\ref{fig:mainflow}
+
+\stdfig{0.8}{audiomodule/mainflow}{flow chart over the main
+function.}{fig:mainflow}
+
+Application specific data is also kept at the top level, constant arrays with
+wave files, scores for the sequencers are stored in header files, while the
+instruments in use both have header and \emph{.c} file.

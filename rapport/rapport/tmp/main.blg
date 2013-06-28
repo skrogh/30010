@@ -8,6 +8,9 @@ A level-1 auxiliary file: audio_module/overall_introduction.aux
 A level-1 auxiliary file: audio_module/overall_analysis.aux
 A level-1 auxiliary file: audio_module/overall_design.aux
 A level-1 auxiliary file: audio_module/overall_implementation.aux
+A level-1 auxiliary file: audio_module/test_results.aux
+A level-1 auxiliary file: results_game.aux
+A level-1 auxiliary file: discussion.aux
 The style file: IEEEannot.bst
 Database file #1: audio_module/litt.bib
 -- IEEEtranS.bst version 1.11 (2003/04/02) by Michael Shell.

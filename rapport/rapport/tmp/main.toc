@@ -56,3 +56,7 @@
 \contentsline {paragraph}{MidiInterpreter}{22}{section*.44}
 \contentsline {paragraph}{OneShotter}{22}{section*.45}
 \contentsline {subsection}{\numberline {4.8}Implementation of main function}{22}{subsection.4.8}
+\contentsline {subsection}{\numberline {4.9}Testing the audio module}{24}{subsection.4.9}
+\contentsline {subsection}{\numberline {4.10}Audio module results}{24}{subsection.4.10}
+\contentsline {section}{\numberline {5}The resulting game}{25}{section.5}
+\contentsline {section}{\numberline {6}Discussion}{27}{section.6}

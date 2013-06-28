@@ -7,7 +7,8 @@ called without a reference from the structure. This somewhat simulates object
 oriented programming and makes the code more manageable.
 
 \begin{lstlisting}[caption={Relevant part of FIFO.h}, language=C,
-label=lst:buffer] struct tag_FIFOBuffer { //FIFO buffer
+label=lst:buffer]
+struct tag_FIFOBuffer { //FIFO buffer
 	uint32_t* data; // data array
 	uint32_t length; // array size
 	uint32_t pointer; // address (in array) of next element

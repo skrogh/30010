@@ -60,3 +60,4 @@
 \contentsline {subsection}{\numberline {4.10}Audio module results}{24}{subsection.4.10}
 \contentsline {section}{\numberline {5}The resulting game}{25}{section.5}
 \contentsline {section}{\numberline {6}Discussion}{27}{section.6}
+\contentsline {section}{\numberline {7}Conclusion}{28}{section.7}

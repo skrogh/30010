@@ -1,0 +1,14 @@
+
+Went well:
+Generation multivoice music.
+Digital resonant filter
+wave player
+
+not so well:
+could not run bandwith limmited waveshaper
+not enough processing power (or unoptimized code) for filter on all voices
+more voices would be nice
+
+future work
+Optimize the wave shaper so interpolation becomes a reasonable option
+change to use of maloc

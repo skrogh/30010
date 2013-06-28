@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: C:\Users\Soren\Git\30010\rapport\rapport\tmp\main.aux
 A level-1 auxiliary file: Frontpage.aux
 A level-1 auxiliary file: specification.aux
 A level-1 auxiliary file: analysis_top.aux
@@ -13,5 +13,8 @@ Database file #1: audio_module/litt.bib
 -- http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 ** Sorting version - not for use with work to be submitted to the IEEE.
+Warning--to sort, need author, organization, or key in Lowpass
+Warning--to sort, need author, organization, or key in SVF
 
 Done.
+(There were 2 warnings)

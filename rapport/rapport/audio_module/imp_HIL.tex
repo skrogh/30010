@@ -16,3 +16,10 @@ The front end of this layer is very simple, four functions are presented:
 To prove consistency in the output stream, the signal is outputted at the
 beginning of the interrupt - then the process returns to the main loop where the
 next output is calculated - the processor then waits for the next interrupt.
+
+\paragraph{Timing LED}
+We had some problems with the calculations not always having time to calculate
+within the given time frame - so an LED was put to light up green, while the
+processor is waiting for the next interrupt. If the LED light is very dim - or
+not lighting at all - it indicates that too much code has to execute and either
+optimizations or reductions has to be made to the code.

@@ -1,0 +1,765 @@
+
+IEEE 695 OMF Linker Version 6.03 (05021601)
+Copyright (C) 1999-2004 ZiLOG, Inc. All Rights Reserved
+
+LINK MAP:
+
+DATE:      Wed Jun 19 20:08:03 2013
+PROCESSOR: assembler
+FILES:     C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\lib\zilog\startupL.obj
+           .\zsldevinit.obj
+           .\ball.obj             .\graphics.obj         .\input.obj            
+           .\joystick.obj         .\lut.obj              .\main.obj             
+           .\math.obj             .\striker.obj          
+           .\timekeeping.obj
+           .\timerlib.obj         .\brick.obj            
+           C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\lib\std\crtrevaaLDD.lib
+           C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\lib\std\fpdumyL.obj
+           C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\lib\zilog\zslLYD.lib
+           
+
+
+COMMAND LIST:
+=============
+/* Linker Command File - proj Debug */
+
+/* compiler options */
+/* -alias -asm -bitfieldsize:32 -charsize:8 -const:RAM -debug */
+/* -define:_Z8F6403 -define:_Z8ENCORE_640_FAMILY */
+/* -define:_Z8ENCORE_F640X -define:_MODEL_LARGE -doublesize:32 */
+/* -NOexpmac -floatsize:32 -NOfplib -genprintf -NOglobalcopy */
+/* -NOglobalcse -NOglobalfold -intrinsic -intsize:16 -intsrc */
+/* -NOjmpopt -NOkeepasm -NOkeeplst -NOlist -NOlistinc -localcopy */
+/* -localcse -localfold -longsize:32 -NOloopopt -maxerrs:50 -model:L */
+/* -NOoptlink -optsize -peephole -NOpromote -quiet -regvar -revaa */
+/* -NOsdiopt -shortsize:16 */
+/* -stdinc:"C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\include\std;C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\include\zilog;C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\include\zilog\Z8Encore_F640X" */
+/* -strict -usrinc:"C:\Users\Soren\Git\30010\termanoid\include" */
+/* -NOwatch -cpu:Z8F6403 */
+/* -asmsw:" -cpu:Z8F6403 -define:_Z8F6403=1 -define:_Z8ENCORE_640_FAMILY=1 -define:_Z8ENCORE_F640X=1 -define:_MODEL_LARGE=1 -include:C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\include\std;C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\include\zilog;C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\include\zilog\Z8Encore_F640X -revaa" */
+
+/* assembler options */
+/* -debug -define:_Z8F6403=1 -define:_Z8ENCORE_640_FAMILY=1 */
+/* -define:_Z8ENCORE_F640X=1 -define:_MODEL_LARGE=1 -genobj */
+/* -NOigcase */
+/* -include:"C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\include\std;C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\include\zilog;C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\include\zilog\Z8Encore_F640X" */
+/* -list -NOlistmac -name -pagelen:56 -pagewidth:80 -quiet -sdiopt */
+/* -warn -NOzmasm -revaa -cpu:Z8F6403 */
+
+-FORMAT=OMF695
+-NOigcase -map -quiet -warn -NOwarnoverlap -NOxref
+
+RANGE ROM $0 : $FFFF
+RANGE RDATA $20 : $FF
+RANGE EDATA $100 : $EFF
+
+CHANGE TEXT=EDATA
+CHANGE TEXT=FAR_DATA
+change NEAR_TXT=NEAR_DATA
+change FAR_TXT=FAR_DATA
+ORDER FAR_BSS, FAR_DATA
+ORDER NEAR_BSS,NEAR_DATA
+COPY NEAR_DATA ROM
+COPY FAR_DATA ROM
+
+define _low_near_romdata = copy base of NEAR_DATA
+define _low_neardata = base of NEAR_DATA
+define _len_neardata = length of NEAR_DATA
+define _low_far_romdata = copy base of FAR_DATA
+define _low_fardata = base of FAR_DATA
+define _len_fardata = length of FAR_DATA
+define _low_nearbss = base of NEAR_BSS
+define _len_nearbss = length of NEAR_BSS
+define _low_farbss = base of FAR_BSS
+define _len_farbss = length of FAR_BSS
+define _far_heaptop = highaddr of EDATA
+define _far_stack = highaddr of EDATA
+define _near_stack = highaddr of RDATA
+define _far_heapbot = top of EDATA
+define _near_heaptop = highaddr of RDATA
+define _near_heapbot = top of RDATA
+
+define _zsl_g_clock_xdefine = 18432000
+
+/* Set frequency to 18432000 Hz */
+define __user_frequency = 18432000
+
+"C:\Users\Soren\Git\30010\project\spil\proj"=  C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\lib\zilog\startupL.obj,  .\zsldevinit.obj,  .\ball.obj,  .\graphics.obj,  .\input.obj,  .\joystick.obj,  .\lut.obj,  .\main.obj,  .\math.obj,  .\striker.obj,  .\timekeeping.obj,  .\timerlib.obj,  .\brick.obj,  C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\lib\std\crtrevaaLDD.lib,  C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\lib\std\fpdumyL.obj,  C:\PROGRA~2\pgm\ZiLOG\ZDSII_~1.3\lib\zilog\zslLYD.lib
+
+
+SEGMENT OVERLAYS:
+=================
+
+Name                                     Base        Top       Length
+------------------------------------ ----------- ----------- ----------
+Section: __VECTORS                        C:0000      C:000E         fh
+
+SPACE ALLOCATION:
+=================
+
+Space              Base        Top         Size
+------------------ ----------- ----------- ---------
+EDATA                   E:0100      E:0554      455h
+RDATA                     R:E0        R:EF       10h
+ROM                     C:0000      C:316C     316dh
+
+
+SEGMENTS WITHIN SPACE:
+======================
+
+EDATA              Type                Base        Top         Size
+------------------ ------------------- ----------- ----------- ---------
+FAR_BSS            normal data              E:0100      E:0125       26h
+FAR_DATA           normal data              E:0126      E:0554      42fh
+
+
+RDATA              Type                Base        Top         Size
+------------------ ------------------- ----------- ----------- ---------
+workingreg         absolute data              R:E0        R:EF       10h
+
+
+ROM                Type                Base        Top         Size
+------------------ ------------------- ----------- ----------- ---------
+__VECTORS          absolute data            C:0000      C:0037       38h
+_sputch_TEXT       normal data              C:21A7      C:21D5       2fh
+_uputch_TEXT       normal data              C:2178      C:2190       19h
+abs_TEXT           normal data              C:27A7      C:27E4       3eh
+aduart0_TEXT       normal data              C:27E5      C:284F       6bh
+ball_TEXT          normal data              C:02BD      C:0C54      998h
+brick_TEXT         normal data              C:1B9F      C:1C92       f4h
+CODE               normal data              C:0038      C:023A      203h
+FAR_DATA           * segment copy *         C:2D3E      C:316C      42fh
+free_TEXT          normal data              C:21D6      C:23A6      1d1h
+getch_TEXT         normal data              C:1F60      C:1FF7       98h
+getfreq_TEXT       normal data              C:1F49      C:1F5F       17h
+imerlib_TEXT       normal data              C:1B23      C:1B9E       7ch
+input_TEXT         normal data              C:14DD      C:1546       6ah
+kbhit_TEXT         normal data              C:274D      C:2759        dh
+keeping_TEXT       normal data              C:1AE1      C:1B22       42h
+main_TEXT          normal data              C:1568      C:17AD      246h
+malloc_TEXT        normal data              C:23A7      C:258A      1e4h
+math_TEXT          normal data              C:17AE      C:17E0       33h
+mstring_TEXT       normal data              C:275A      C:27A6       4dh
+nt_send_TEXT       normal data              C:1D75      C:1F48      1d4h
+oystick_TEXT       normal data              C:1547      C:1567       21h
+putch_TEXT         normal data              C:203A      C:2096       5dh
+raphics_TEXT       normal data              C:0C55      C:14DC      888h
+reverse_TEXT       normal data              C:2C69      C:2D3D       d5h
+ROM_TEXT           normal data              C:023B      C:024B       11h
+sio_TEXT           normal data              C:1C93      C:1D74       e2h
+startup            normal data              C:024C      C:02BC       71h
+striker_TEXT       normal data              C:17E1      C:1AE0      300h
+strlen_TEXT        normal data              C:1FF8      C:2039       42h
+t_putch_TEXT       normal data              C:2191      C:21A6       16h
+teuart0_TEXT       normal data              C:20BE      C:2177       bah
+tstring_TEXT       normal data              C:258B      C:274C      1c2h
+ultoa_TEXT         normal data              C:2850      C:2C68      419h
+ustoa_TEXT         normal data              C:2097      C:20BD       27h
+
+SEGMENTS WITHIN MODULES:
+========================
+
+Module: ..\..\src\boot\common\startupl.asm (File: startupL.obj) Version: 1:0 02/23/2005 13:22:37
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: __VECTORS                           C:0000      C:0037       38h
+    Segment: FAR_BSS                             E:0100      E:0101        2h
+    Segment: FAR_DATA                            E:0126      E:0126        1h
+    Segment: startup                             C:024C      C:02BC       71h
+    Segment: workingreg                            R:E0        R:EF       10h
+
+
+Module: ..\..\TERMANOID\SRC\BALL.C (File: ball.obj) Version: 1:0 06/19/2013 20:08:00
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: ball_TEXT                           C:02BD      C:0C54      998h
+
+
+Module: ..\..\TERMANOID\SRC\BRICK.C (File: brick.obj) Version: 1:0 06/19/2013 20:08:03
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: brick_TEXT                          C:1B9F      C:1C92       f4h
+    Segment: FAR_DATA                            E:054B      E:0554        ah
+
+
+Module: ..\..\TERMANOID\SRC\GRAPHICS.C (File: graphics.obj) Version: 1:0 06/19/2013 20:08:01
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: raphics_TEXT                        C:0C55      C:14DC      888h
+    Segment: ROM_TEXT                            C:023B      C:0244        ah
+
+
+Module: ..\..\TERMANOID\SRC\INPUT.C (File: input.obj) Version: 1:0 06/19/2013 20:08:01
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: FAR_BSS                             E:0102      E:0103        2h
+    Segment: input_TEXT                          C:14DD      C:1546       6ah
+
+
+Module: ..\..\TERMANOID\SRC\JOYSTICK.C (File: joystick.obj) Version: 1:0 06/19/2013 20:08:01
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: oystick_TEXT                        C:1547      C:1567       21h
+
+
+Module: ..\..\TERMANOID\SRC\LUT.C (File: lut.obj) Version: 1:0 06/19/2013 20:08:01
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: FAR_DATA                            E:012C      E:052B      400h
+
+
+Module: ..\..\TERMANOID\SRC\MAIN.C (File: main.obj) Version: 1:0 06/19/2013 20:08:02
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: FAR_BSS                             E:0104      E:0104        1h
+    Segment: main_TEXT                           C:1568      C:17AD      246h
+    Segment: ROM_TEXT                            C:0245      C:024B        7h
+
+
+Module: ..\..\TERMANOID\SRC\MATH.C (File: math.obj) Version: 1:0 06/19/2013 20:08:02
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: math_TEXT                           C:17AE      C:17E0       33h
+
+
+Module: ..\..\TERMANOID\SRC\STRIKER.C (File: striker.obj) Version: 1:0 06/19/2013 20:08:02
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: FAR_DATA                            E:0539      E:054A       12h
+    Segment: striker_TEXT                        C:17E1      C:1AE0      300h
+
+
+Module: ..\..\TERMANOID\SRC\TIMEKEEPING.C (File: timekeeping.obj) Version: 1:0 06/19/2013 20:08:02
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: keeping_TEXT                        C:1AE1      C:1B22       42h
+
+
+Module: ..\..\TERMANOID\SRC\TIMERLIB.C (File: timerlib.obj) Version: 1:0 06/19/2013 20:08:02
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: __VECTORS                           C:0000      C:000D        eh
+    Segment: FAR_BSS                             E:0105      E:0106        2h
+    Segment: imerlib_TEXT                        C:1B23      C:1B9E       7ch
+
+
+Module: ..\UART\COMMON\GETCH.C (Library: zslLYD.lib) Version: 1:0 02/23/2005 13:32:41
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: getch_TEXT                          C:1F60      C:1FF7       98h
+
+
+Module: ..\UART\COMMON\KBHIT.C (Library: zslLYD.lib) Version: 1:0 02/23/2005 13:32:41
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: kbhit_TEXT                          C:274D      C:2759        dh
+
+
+Module: ..\UART\COMMON\PUTCH.C (Library: zslLYD.lib) Version: 1:0 02/23/2005 13:32:42
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: putch_TEXT                          C:203A      C:2096       5dh
+
+
+Module: ..\UART\COMMON\READUART0.C (Library: zslLYD.lib) Version: 1:0 02/23/2005 13:32:37
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: aduart0_TEXT                        C:27E5      C:284F       6bh
+    Segment: FAR_DATA                            E:0538      E:0538        1h
+
+
+Module: ..\UART\COMMON\WRITEUART0.C (Library: zslLYD.lib) Version: 1:0 02/23/2005 13:32:38
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: FAR_DATA                            E:052F      E:052F        1h
+    Segment: teuart0_TEXT                        C:20BE      C:2177       bah
+
+
+Module: C:\Users\Soren\Git\30010\project\spil\zsldevinit.asm (File: zsldevinit.obj) Version: 1:0 06/19/2013 20:07:58
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: CODE                                C:0038      C:0039        2h
+    Segment: FAR_DATA                            E:0127      E:012B        5h
+
+
+Module: COMMON\ABS.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:08
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: abs_TEXT                            C:27A7      C:27E4       3eh
+
+
+Module: common\fpdumyl.asm (File: fpdumyL.obj) Version: 1:0 02/23/2005 13:22:38
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: CODE                                C:003A      C:003A        1h
+    Segment: FAR_BSS                             E:0107      E:010A        4h
+
+
+Module: common\frame.asm (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:20
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: CODE                                C:003B      C:00A1       67h
+
+
+Module: COMMON\FREE.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:09
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: FAR_DATA                            E:0530      E:0535        6h
+    Segment: free_TEXT                           C:21D6      C:23A6      1d1h
+
+
+Module: COMMON\MALLOC.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:10
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: malloc_TEXT                         C:23A7      C:258A      1e4h
+
+
+Module: COMMON\PRINT_GLOBALS.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:11
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: FAR_BSS                             E:010B      E:0125       1bh
+    Segment: FAR_DATA                            E:052D      E:052E        2h
+
+
+Module: COMMON\PRINT_PUTCH.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:11
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: t_putch_TEXT                        C:2191      C:21A6       16h
+
+
+Module: COMMON\PRINT_PUTROMSTRING.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:12
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: mstring_TEXT                        C:275A      C:27A6       4dh
+
+
+Module: COMMON\PRINT_PUTSTRING.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:12
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: tstring_TEXT                        C:258B      C:274C      1c2h
+
+
+Module: COMMON\PRINT_SEND.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:12
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: nt_send_TEXT                        C:1D75      C:1F48      1d4h
+
+
+Module: COMMON\PRINT_SPUTCH.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:11
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: _sputch_TEXT                        C:21A7      C:21D5       2fh
+
+
+Module: COMMON\PRINT_UPUTCH.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:11
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: _uputch_TEXT                        C:2178      C:2190       19h
+
+
+Module: common\sbrkld.asm (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:20
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: CODE                                C:01C2      C:01FC       3bh
+    Segment: FAR_DATA                            E:0536      E:0537        2h
+
+
+Module: COMMON\SIO.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:13
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: FAR_DATA                            E:052C      E:052C        1h
+    Segment: sio_TEXT                            C:1C93      C:1D74       e2h
+
+
+Module: COMMON\STRLEN.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:14
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: strlen_TEXT                         C:1FF8      C:2039       42h
+
+
+Module: common\ucase.asm (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:19
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: CODE                                C:01FD      C:023A       3eh
+
+
+Module: common\uldiv.asm (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:19
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: CODE                                C:016D      C:01C1       55h
+
+
+Module: common\ulmul.asm (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:19
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: CODE                                C:00A2      C:0139       98h
+
+
+Module: COMMON\ULTOA.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:16
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: ultoa_TEXT                          C:2850      C:2C68      419h
+
+
+Module: COMMON\UREVERSE.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:17
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: reverse_TEXT                        C:2C69      C:2D3D       d5h
+
+
+Module: COMMON\USTOA.C (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:18
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: ustoa_TEXT                          C:2097      C:20BD       27h
+
+
+Module: common\uwmul.asm (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:19
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: CODE                                C:013A      C:016C       33h
+
+
+Module: get_freq.asm (Library: crtrevaaLDD.lib) Version: 1:0 02/23/2005 13:27:19
+
+    Name                                        Base        Top      Size
+    --------------------------------------- ----------- ----------- ---------
+    Segment: getfreq_TEXT                        C:1F49      C:1F5F       17h
+
+EXTERNAL DEFINITIONS:
+=====================
+
+Symbol                             Address   Module          Segment
+-------------------------------- ----------- --------------- --------------------------------
+_0__far_atof                          E:0107 fpdumyl         FAR_BSS                         
+_0__far_frexp                         E:0107 fpdumyl         FAR_BSS                         
+_0__far_modf                          E:0107 fpdumyl         FAR_BSS                         
+_0__far_strtod                        E:0107 fpdumyl         FAR_BSS                         
+_0__near_atof                         E:0107 fpdumyl         FAR_BSS                         
+_0__near_frexp                        E:0107 fpdumyl         FAR_BSS                         
+_0__near_modf                         E:0107 fpdumyl         FAR_BSS                         
+_0__near_strtod                       E:0107 fpdumyl         FAR_BSS                         
+_0__u_dtoe                            E:0107 fpdumyl         FAR_BSS                         
+_0__u_dtof                            E:0107 fpdumyl         FAR_BSS                         
+_0__u_dtog                            E:0107 fpdumyl         FAR_BSS                         
+_0__u_flt_info                        E:0107 fpdumyl         FAR_BSS                         
+_0__u_flt_rnd                         E:0107 fpdumyl         FAR_BSS                         
+_0_acos                               E:0107 fpdumyl         FAR_BSS                         
+_0_asin                               E:0107 fpdumyl         FAR_BSS                         
+_0_atan                               E:0107 fpdumyl         FAR_BSS                         
+_0_atan2                              E:0107 fpdumyl         FAR_BSS                         
+_0_ceil                               E:0107 fpdumyl         FAR_BSS                         
+_0_cosh                               E:0107 fpdumyl         FAR_BSS                         
+_0_exp                                E:0107 fpdumyl         FAR_BSS                         
+_0_fabs                               E:0107 fpdumyl         FAR_BSS                         
+_0_floor                              E:0107 fpdumyl         FAR_BSS                         
+_0_fmod                               E:0107 fpdumyl         FAR_BSS                         
+_0_ldexp                              E:0107 fpdumyl         FAR_BSS                         
+_0_log                                E:0107 fpdumyl         FAR_BSS                         
+_0_log10                              E:0107 fpdumyl         FAR_BSS                         
+_0_pow                                E:0107 fpdumyl         FAR_BSS                         
+_0_sinh                               E:0107 fpdumyl         FAR_BSS                         
+_0_sqrt                               E:0107 fpdumyl         FAR_BSS                         
+_0_tan                                E:0107 fpdumyl         FAR_BSS                         
+_0_tanh                               E:0107 fpdumyl         FAR_BSS                         
+_1__far_frexp                         E:0107 fpdumyl         FAR_BSS                         
+_1__far_modf                          E:0107 fpdumyl         FAR_BSS                         
+_1__far_strtod                        E:0107 fpdumyl         FAR_BSS                         
+_1__near_frexp                        E:0107 fpdumyl         FAR_BSS                         
+_1__near_modf                         E:0107 fpdumyl         FAR_BSS                         
+_1__near_strtod                       E:0107 fpdumyl         FAR_BSS                         
+_1__u_dtoe                            E:0107 fpdumyl         FAR_BSS                         
+_1__u_dtof                            E:0107 fpdumyl         FAR_BSS                         
+_1__u_dtog                            E:0107 fpdumyl         FAR_BSS                         
+_1__u_flt_info                        E:0107 fpdumyl         FAR_BSS                         
+_1__u_flt_rnd                         E:0107 fpdumyl         FAR_BSS                         
+_1_atan2                              E:0107 fpdumyl         FAR_BSS                         
+_1_fmod                               E:0107 fpdumyl         FAR_BSS                         
+_1_ldexp                              E:0107 fpdumyl         FAR_BSS                         
+_1_pow                                E:0107 fpdumyl         FAR_BSS                         
+_1_strtod                             E:0107 fpdumyl         FAR_BSS                         
+_2__u_dtoe                            E:0107 fpdumyl         FAR_BSS                         
+_2__u_dtof                            E:0107 fpdumyl         FAR_BSS                         
+_2__u_dtog                            E:0107 fpdumyl         FAR_BSS                         
+_2__u_flt_info                        E:0107 fpdumyl         FAR_BSS                         
+___print_buff                         E:010B PRINT_GLOBALS   FAR_BSS                         
+___print_fmt                          E:0117 PRINT_GLOBALS   FAR_BSS                         
+___print_leading_char                 E:0123 PRINT_GLOBALS   FAR_BSS                         
+___print_len                          E:0122 PRINT_GLOBALS   FAR_BSS                         
+___print_out                          E:0124 PRINT_GLOBALS   FAR_BSS                         
+___print_putch                        C:2191 PRINT_PUTCH     t_putch_TEXT                    
+___print_putromstring                 C:275A PRINT_PUTROMSTR mstring_TEXT                    
+___print_send                         C:1D75 PRINT_SEND      nt_send_TEXT                    
+___print_sendstring                   C:258B PRINT_PUTSTRING tstring_TEXT                    
+___print_sputch                       C:21A7 PRINT_SPUTCH    _sputch_TEXT                    
+___print_uputch                       C:2178 PRINT_UPUTCH    _uputch_TEXT                    
+___print_xputch                       E:052D PRINT_GLOBALS   FAR_DATA                        
+__close_periphdevice                  C:0039 zsldevinit      CODE                            
+__far_atof                            C:003A fpdumyl         CODE                            
+__far_free                            C:21D6 FREE            free_TEXT                       
+__far_frexp                           C:003A fpdumyl         CODE                            
+__far_malloc                          C:241A MALLOC          malloc_TEXT                     
+__far_modf                            C:003A fpdumyl         CODE                            
+__far_strlen                          C:1FF8 STRLEN          strlen_TEXT                     
+__far_strtod                          C:003A fpdumyl         CODE                            
+__fpadd                               C:003A fpdumyl         CODE                            
+__fpcmp                               C:003A fpdumyl         CODE                            
+__fpdiv                               C:003A fpdumyl         CODE                            
+__fpftol                              C:003A fpdumyl         CODE                            
+__fpltof                              C:003A fpdumyl         CODE                            
+__fpmul                               C:003A fpdumyl         CODE                            
+__fpneg                               C:003A fpdumyl         CODE                            
+__fppack                              C:003A fpdumyl         CODE                            
+__fpsub                               C:003A fpdumyl         CODE                            
+__fpultof                             C:003A fpdumyl         CODE                            
+__fpupop1                             C:003A fpdumyl         CODE                            
+__fpupop2                             C:003A fpdumyl         CODE                            
+__framereset                          C:0066 frame           CODE                            
+__frameset                            C:0047 frame           CODE                            
+__frameset0                           C:0045 frame           CODE                            
+__frameset00                          C:0043 frame           CODE                            
+__iframereset                         C:007D frame           CODE                            
+__iframeset00                         C:003B frame           CODE                            
+__intrp                               E:0126 startupl        FAR_DATA                        
+__near_atof                           C:003A fpdumyl         CODE                            
+__near_frexp                          C:003A fpdumyl         CODE                            
+__near_modf                           C:003A fpdumyl         CODE                            
+__near_strtod                         C:003A fpdumyl         CODE                            
+__open_periphdevice                   C:0038 zsldevinit      CODE                            
+__s_sbrk                              C:01C2 sbrkld          CODE                            
+__slmul                               C:00A2 ulmul           CODE                            
+__swmul                               C:013A uwmul           CODE                            
+__u_dtoe                              C:003A fpdumyl         CODE                            
+__u_dtof                              C:003A fpdumyl         CODE                            
+__u_dtog                              C:003A fpdumyl         CODE                            
+__u_flt_info                          C:003A fpdumyl         CODE                            
+__u_flt_rnd                           C:003A fpdumyl         CODE                            
+__u_ltoa                              C:2850 ULTOA           ultoa_TEXT                      
+__u_reverse                           C:2C69 UREVERSE        reverse_TEXT                    
+__u_stoa                              C:2097 USTOA           ustoa_TEXT                      
+__ucase                               C:01FD ucase           CODE                            
+__uldiv                               C:016D uldiv           CODE                            
+__ulmul                               C:00A2 ulmul           CODE                            
+__user_frequency                    01194000 (User Defined)
+__uwmul                               C:013A uwmul           CODE                            
+_abs                                  C:27A7 ABS             abs_TEXT                        
+_acos                                 C:003A fpdumyl         CODE                            
+_asin                                 C:003A fpdumyl         CODE                            
+_atan                                 C:003A fpdumyl         CODE                            
+_atan2                                C:003A fpdumyl         CODE                            
+_background_color                     C:0CD7 GRAPHICS        raphics_TEXT                    
+_blink                                C:0F34 GRAPHICS        raphics_TEXT                    
+_c_startup                            C:024C startupl        startup                         
+_ceil                                 C:003A fpdumyl         CODE                            
+_check_collision_ball                 C:0953 BALL            ball_TEXT                       
+_check_collisions                     C:1573 MAIN            main_TEXT                       
+_close_periphdevice                   C:0039 zsldevinit      CODE                            
+_clreol                               C:0E1E GRAPHICS        raphics_TEXT                    
+_clrscr                               C:0DED GRAPHICS        raphics_TEXT                    
+_collided                             C:1C06 BRICK           brick_TEXT                      
+_collided_ball                        C:04F1 BALL            ball_TEXT                       
+_color                                C:0D1E GRAPHICS        raphics_TEXT                    
+_cosh                                 C:003A fpdumyl         CODE                            
+_create_ball                          C:0B9B BALL            ball_TEXT                       
+_create_brick                         C:1C21 BRICK           brick_TEXT                      
+_create_striker                       C:19F7 STRIKER         striker_TEXT                    
+_derphandler                          C:1568 MAIN            main_TEXT                       
+_destroy_ball                         C:0C3D BALL            ball_TEXT                       
+_destroy_brick                        C:1C7B BRICK           brick_TEXT                      
+_destroy_striker                      C:1AB2 STRIKER         striker_TEXT                    
+_draw_char                            C:14CC GRAPHICS        raphics_TEXT                    
+_draw_chars                           C:14A4 GRAPHICS        raphics_TEXT                    
+_errno                                E:0100 startupl        FAR_BSS                         
+_exit                                 C:02BB startupl        startup                         
+_exp                                  C:003A fpdumyl         CODE                            
+_fabs                                 C:003A fpdumyl         CODE                            
+_far_heapbot                        00000554 (User Defined)
+_far_heaptop                        00000EFF (User Defined)
+_far_stack                          00000EFF (User Defined)
+_flag                                 E:0104 MAIN            FAR_BSS                         
+_floor                                C:003A fpdumyl         CODE                            
+_fmod                                 C:003A fpdumyl         CODE                            
+_foreground_color                     C:0C55 GRAPHICS        raphics_TEXT                    
+_free_list                            E:0534 FREE            FAR_DATA                        
+_g_clock0                             E:0128 zsldevinit      FAR_DATA                        
+_g_clock1                             E:0128 zsldevinit      FAR_DATA                        
+_g_Rxflag0                            E:0538 READUART0       FAR_DATA                        
+_g_simulate                           E:0127 zsldevinit      FAR_DATA                        
+_g_Txflag0                            E:052F WRITEUART0      FAR_DATA                        
+_get_freq                             C:1F4D get_freq        getfreq_TEXT                    
+_get_input                            C:14E4 INPUT           input_TEXT                      
+_getch                                C:1F60 GETCH           getch_TEXT                      
+_gotoxy                               C:0E4F GRAPHICS        raphics_TEXT                    
+_init_input                           C:14DD INPUT           input_TEXT                      
+_init_uart                            C:1CC1 SIO             sio_TEXT                        
+_inputvalues                          E:0102 INPUT           FAR_BSS                         
+_kbhit                                C:274D KBHIT           kbhit_TEXT                      
+_ldexp                                C:003A fpdumyl         CODE                            
+_len_farbss                         00000026 (User Defined)
+_len_fardata                        0000042F (User Defined)
+_len_nearbss                        00000000 (User Defined)
+_len_neardata                       00000000 (User Defined)
+_log                                  C:003A fpdumyl         CODE                            
+_log10                                C:003A fpdumyl         CODE                            
+_low_far_romdata                    00002D3E (User Defined)
+_low_farbss                         00000100 (User Defined)
+_low_fardata                        00000126 (User Defined)
+_low_near_romdata                   00000000 (User Defined)
+_low_nearbss                        00000000 (User Defined)
+_low_neardata                       00000000 (User Defined)
+_main                                 C:157A MAIN            main_TEXT                       
+_near_heapbot                       000000EF (User Defined)
+_near_heaptop                       000000FF (User Defined)
+_near_stack                         000000FF (User Defined)
+_open_periphdevice                    C:0038 zsldevinit      CODE                            
+_pow                                  C:003A fpdumyl         CODE                            
+_putch                                C:203A PUTCH           putch_TEXT                      
+_read_joystick_x                      C:155E JOYSTICK        oystick_TEXT                    
+_read_UART0                           C:27E5 READUART0       aduart0_TEXT                    
+_render                               C:1B9F BRICK           brick_TEXT                      
+_render_ball                          C:02BD BALL            ball_TEXT                       
+_render_striker                       C:18EE STRIKER         striker_TEXT                    
+_reset                                C:1044 GRAPHICS        raphics_TEXT                    
+_resetbgcolor                         C:0DBC GRAPHICS        raphics_TEXT                    
+_reverse                              C:0FBC GRAPHICS        raphics_TEXT                    
+_select_port                          C:1C93 SIO             sio_TEXT                        
+_set_timer                            C:1B35 TIMERLIB        imerlib_TEXT                    
+_setup_input                          C:153D INPUT           input_TEXT                      
+_setup_joystick                       C:1547 JOYSTICK        oystick_TEXT                    
+_setup_timer                          C:1AE1 TIMEKEEPING     keeping_TEXT                    
+_sin                                  C:17AE MATH            math_TEXT                       
+_SIN                                  E:012C LUT             FAR_DATA                        
+_sinh                                 C:003A fpdumyl         CODE                            
+_sqrt                                 C:003A fpdumyl         CODE                            
+_strLen                               C:10D0 GRAPHICS        raphics_TEXT                    
+_tan                                  C:003A fpdumyl         CODE                            
+_tanh                                 C:003A fpdumyl         CODE                            
+_textType                             C:1087 GRAPHICS        raphics_TEXT                    
+_timer0int                            C:1B23 TIMERLIB        imerlib_TEXT                    
+_timer0int_fp                         E:0105 TIMERLIB        FAR_BSS                         
+_underline                            C:0EAC GRAPHICS        raphics_TEXT                    
+_update_ball                          C:032A BALL            ball_TEXT                       
+_update_striker                       C:17E1 STRIKER         striker_TEXT                    
+_window                               C:10F7 GRAPHICS        raphics_TEXT                    
+_write_UART0                          C:20BE WRITEUART0      teuart0_TEXT                    
+_zsl_g_clock_xdefine                01194000 (User Defined)
+
+212 external symbol(s).
+
+
+START ADDRESS:
+==============
+(C:024C) set in module ..\..\src\boot\common\startupl.asm.
+
+CALL GRAPH
+==========
+Depth Address    CF Function                       Calls Function
+----- ---------- -- ------------------------------ --------------------------------
+    1 R:20        0 _get_freq                      ->
+    2 E:0100      0 _f__far_modf                   ->
+    3 R:20        0 _n__floor                      ->
+    4 R:20        0 _n___u_flt_rnd                 ->
+    5 R:20        0 _n__far_modf                   ->
+    6 R:20        0 _n__sqrt                       ->
+    7 R:20        0 _n__near_modf                  ->
+    8 E:0100      0 _f__atan                       ->
+    9 E:0100      0 _f__pow                        ->
+   10 R:20        0 _n__near_strtod                ->
+   11 E:0100      0 _f__atan2                      ->
+   12 R:20        0 _n__far_strtod                 ->
+   13 E:0100      0 _f__far_strtod                 ->
+   14 R:20        0 _n__atan                       ->
+   15 E:0100      0 _f__log10                      ->
+   16 E:0100      0 _f__log                        ->
+   17 E:0100      0 _f__floor                      ->
+   18 R:20        0 _n__exp                        ->
+   19 E:0100      0 _f__fmod                       ->
+   20 E:0100      0 _f__near_modf                  ->
+   21 R:20        0 _n__tan                        ->
+   22 E:0100      0 _f___u_flt_info                ->
+   23 R:20        0 _n__atan2                      ->
+   24 R:20        0 _n__near_atof                  ->
+   25 E:0100      0 _f__far_atof                   ->
+   26 R:20        0 _n__far_atof                   ->
+   27 E:0100      0 _f__acos                       ->
+   28 E:0100      0 _f__cosh                       ->
+   29 R:20        0 _n___u_dtog                    ->
+   30 R:20        0 _n___u_dtof                    ->
+   31 R:20        0 _n___u_dtoe                    ->
+   32 R:20        0 _n__cosh                       ->
+   33 R:20        0 _n__sinh                       ->
+   34 R:20        0 _n__acos                       ->
+   35 E:0100      0 _f__far_frexp                  ->
+   36 E:0100      0 _f__tan                        ->
+   37 R:20        0 _n__ldexp                      ->
+   38 E:0100      0 _f__tanh                       ->
+   39 R:20        0 _n___u_flt_info                ->
+   40 E:0100      0 _f__sinh                       ->
+   41 E:0100      0 _f__near_frexp                 ->
+   42 E:0100      0 _f__near_atof                  ->
+   43 E:0100      0 _f___u__dtog                   ->
+   44 E:0100      0 _f___u__dtof                   ->
+   45 E:0100      0 _f___u__dtoe                   ->
+   46 R:20        0 _n__tanh                       ->
+   47 R:20        0 _n__near_frexp                 ->
+   48 R:20        0 _n__far_frexp                  ->
+   49 E:0100      0 _f__ldexp                      ->
+   50 E:0100      0 _f__asin                       ->
+   51 R:20        0 _n__fabs                       ->
+   52 E:0100      0 _f__ceil                       ->
+   53 R:20        0 _n__pow                        ->
+   54 E:0100      0 _f__near_strtod                ->
+   55 E:0100      0 _f__fabs                       ->
+   56 R:20        0 _n__ceil                       ->
+   57 R:20        0 _n__fmod                       ->
+   58 R:20        0 _n__log10                      ->
+   59 R:20        0 _n__asin                       ->
+   60 E:0100      0 _f__sqrt                       ->
+   61 E:0100      0 _f___u_flt_rnd                 ->
+   62 R:20        0 _n__log                        ->
+   63 E:0100      0 _f__exp                        ->
+
+
+END OF LINK MAP:
+================
+0 Errors
+0 Warnings

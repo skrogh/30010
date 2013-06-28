@@ -1,8 +1,0 @@
-#ifndef _SOUND_H
-#define _SOUND_H
-
-enum { WINNING_SOUND, BRICK_COLLISION_SOUND, BORDER_COLLISION_SOUND, STRIKER_COLLISION_SOUND }; 
-void setup_sound();
-void play_sound( unsigned char sound );
-
-#endif

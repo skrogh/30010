@@ -35,3 +35,5 @@
 \contentsline {paragraph}{AHDSR}{18}{section*.26}
 \contentsline {paragraph}{WaveShaper}{18}{section*.27}
 \contentsline {paragraph}{MidiInterpreter}{19}{section*.28}
+\contentsline {paragraph}{OneShotter}{19}{section*.29}
+\contentsline {subsection}{\numberline {3.8}Implementation of main function}{19}{subsection.3.8}

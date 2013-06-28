@@ -29,16 +29,19 @@ void update_handler(void) {
 	flag = true;
 }
 
-
+//start a new game
 void start_game( striker_t ** striker, ball_t ** ball ) {
 	*striker = create_striker( STRIKER_SPAWN_X, SCREEN_HEIGHT );
 	*ball = create_ball();
-	load_level( 5 );
+	load_level( 1 );
 	start_current_level();	
 	game_state = PLAYING;
+	play_sound( POPCORN_START );
 }
 
+//end a game and cleanup
 void end_game( striker_t ** striker, ball_t ** ball ) {
+	play_sound( POPCORN_STOP );
 	destroy_striker( *striker );
 	destroy_ball( *ball );
 }

@@ -31,23 +31,9 @@ interface directly with the hardware:
 The rest of the document will primarily focus on implementation on the
 \emph{Stellaris Launchpad}.
 
-\subsubsection{Hardware Interface Layer (\emph{HIL})}
-The front end of this layer is very simple, four functions are presented:
-\begin{itemize}
-  \item void initiateHardware(): This function is used to initiate the hardware.
-  Sets up PLL, timers, GPIO and 44kHz interrupt on Stellaris.
-  \item void busyWaiting( FIFOBuffer* midiBuffer ): This functions waits until
-  the next output should be calculated, while moving data to the midiBuffer
-  FIFO.
-  \item void writeBuffer( int32\_t signal ): This functions writes the current
-  output to the output buffer.
-  \item void loopCondition(): Returns 1 if the program should continue execution
-  and 0 if it should terminate. On the \emph{Stellaris Launchpad} this is
-  replaced by a \emph{\#define}, replacing the function with a constant 0.
-\end{itemize}
+\input{audio_module/imp_FIFO} 
 
-To prove consistency in the output stream, the signal is outputted at the
-beginning of the interrupt - then the process returns to the main loop where the
-next output is calculated - the processor then waits for the next interrupt.
+\input{audio_module/imp_HIL}
 
-\subsubsecton
+
+

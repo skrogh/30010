@@ -1,0 +1,57 @@
+\subsubsection{FIFO buffer}
+This is a general library for creating \emph{FIFO} buffers in software.
+The buffer is created as a structure and only the structure itself and the
+function to initiate it is included in the header-file - all functions performed
+by the buffer is kept as function pointers in the structure, and can thus not be
+called without a reference from the structure. This somewhat simulates object
+oriented programming and makes the code more manageable.
+
+\begin{lstlisting}[caption={Relevant part of FIFO.h}, language=C,
+label=lst:buffer] struct tag_FIFOBuffer { //FIFO buffer
+	uint32_t* data; // data array
+	uint32_t length; // array size
+	uint32_t pointer; // address (in array) of next element
+	uint32_t elements; // number of  elements in fifo
+	/*
+	 * push @data into the buffer, returns 1 on success, 0 on full buffer
+	 */
+	uint32_t (*push)( FIFOBuffer* fifoBuffer, uint32_t data );
+	/*
+	 * Pops a data element from the buffer into the address specified by the pointer @data.
+	 * If there is no data to pop, 0 is returned and @data is not changed, else 1 is returned.
+	 */
+	uint32_t (*pop)( FIFOBuffer* fifoBuffer, uint32_t* data );
+	/*
+	 * Peaks at a data element from the buffer and puts it into the address specified by the pointer @data,
+	 * without removing it from the buffer.
+	 * @depth specifies how far to look into the buffer.
+	 * If there is no data to pop, 0 is returned and @data is not changed, else 1 is returned.
+	 */
+	uint32_t (*peak)( FIFOBuffer* fifoBuffer, uint32_t* data, uint32_t depth ); // peak at the element depth into the stack (0 = top, 1 = just under top) - returns 1 if that element exists.
+};
+\end{lstlisting}
+
+The  relevant part of the \emph{FIFO} header file is seen above in
+listing:~\ref{lst:buffer}. It can be seen that the \emph{peak} and \emph{pop}
+does not return the value of the data element directly, but returns a value
+indicating success or failure - while the data element is returned by changing
+the value of the variable pointed to by \emph{data}. This ensures the
+capability of error handling (a bit like throwing an exception in \emph{Java}).
+
+\stdfig{0.8}{audiomodule/FIFO}{
+Graphical description of the FIFO buffer. The green arrow represents the reading
+head (\emph{pointer}).\\
+In \emph{A} the buffer is initialized with a length of 4.\\
+In \emph{B} 3 elements $[1,~2,~3]$ are pushed into the buffer.\\
+In \emph{C} the 3 elements are popped out again in order $[1,~2,~3]$.\\
+In \emph{D} 4 more elements are pushed in.\\
+In \emph{E} 3 elements has been popped out, notice how the reading head loops
+around the edge of the buffer.
+ }{fig:fifo}
+
+The \emph{FIFO} buffer is initialized with the function \emph{createFIFOBuffer}.
+The function is passed a pointer to the buffer to initiate, a pointer to an
+array for storing the data and a value for the length of the buffer.
+
+As there is no need to add or remove buffers dynamically the \emph{malloc}
+function is not used for this.

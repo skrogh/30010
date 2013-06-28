@@ -1,0 +1,20 @@
+\section{Conclusion}
+We have created an arkanoid clone, named Smashing Bricks, that runs on an eZ8 microcontroller
+ development board and communicates with a Stellars Launchpad microcontroller to produce sound effects
+that go along with the game. The software has been designed to be modular and
+easily extensible. We believe we have succeeded in this, since modules are self contained, 
+and provide a few well defined entry points for other modules to use. The final game has
+the following features:
+\begin{itemize}
+	\item Continuously calculated reflection angle from the striker.
+	\item Bricks with any number of lives, colored after this number.
+	\item Background music.
+	\item Sound effects.
+	\item ASCII art backgrounds generated from real pictures.
+	\item Analog joystick input.
+	\item A score system.
+	\item Multiple levels.
+	\item Limited number of player lives.
+\end{itemize}
+Which is all but the two lowest priority items on our wanted feature list. The developed API and application code
+would allow for these features being added with only minor changes to the existing code.

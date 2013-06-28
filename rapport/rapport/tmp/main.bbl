@@ -18,6 +18,20 @@
 \fi
 #2}}
 
+\bibitem{SVF}
+\BIBentryALTinterwordspacing
+``Audio effects - peaking filters,'' June 2013. [Online]. Available:
+  \url{http://www.spinsemi.com/knowledge_base/effects.html#Peaking_filters}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Lowpass}
+\BIBentryALTinterwordspacing
+``Audio effects - simple filters,'' June 2013. [Online]. Available:
+  \url{http://www.spinsemi.com/knowledge_base/effects.html#Simple_filters}
+\BIBentrySTDinterwordspacing
+
+
 \bibitem{Stellaris}
 \BIBentryALTinterwordspacing
 T.~Instruments, ``Stellaris\textregistered lm4f120 launchpad evaluation kit,''
@@ -42,6 +56,13 @@ J.~McClintock, ``Synth edit homepage,'' June 2013. [Online]. Available:
 
 \bibitem{Lect2}
 J.~Merayo, ``Programming project - course 30010, lecture 02,'' June 2013.
+
+
+\bibitem{MIDI}
+\BIBentryALTinterwordspacing
+C.~S. Sapp, ``Essentials of the midi protocol.'' [Online]. Available:
+  \url{https://ccrma.stanford.edu/~craig/articles/linuxmidi/misc/essenmidi.html}
+\BIBentrySTDinterwordspacing
 
 
 \bibitem{SEimg}

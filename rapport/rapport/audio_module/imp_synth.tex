@@ -1,1 +1,75 @@
 \subsubsection{implementation of the synth modules}
+The synthesizer modules are built as encapsulated structures, like the FIFO
+buffer.
+
+This allows for easy, fast and structured construction of instruments.
+
+All the modules are kept in a folder named \emph{synth\_lib}
+
+\paragraph{VCO}
+The \emph{VCO} works by incrementing a counter by a value $value =
+44000 \times \frac{frequency in Hz}{2^{32}}$ for each update. The natural
+overflow of the counter becomes the saw wave output. The frequency is found in a
+pre-generated look up table (array) with the \emph{freq} as the index. 
+
+\paragraph{LFO}
+The \emph{LFO} is functionally similar to the \emph{VCO}, but the speed is set
+$2^7$ times slower - thus going down to about $0.1Hz$. On overflow of the
+counter the \emph{tick} output is set high.
+
+\paragraph{Sequencer}
+The sequencer simply counts its way through an array, looping back to the start,
+when it reaches the end.
+
+\paragraph{LowPass}
+The algorithm for the IIR low-pass filter is taken from the description given
+in \cite{Lowpass}. The implantation thus consists of transferring this to
+written code. The code itself can be found in the appendix.
+
+Since fixed-point arthritics are used, multiplication is performed with 64 bit
+variables to avoid overflow
+
+\paragraph{SVF}
+The algorithm for the state-variable filter is taken from \cite{SVF}.
+
+As the gain of the filter can exceed 1 at the cutoff frequency, it is important
+to reduce the volume of the signal going into the filter.
+
+\paragraph{AHDSR}
+The \emph{AHDSR} update function is implemented with a \emph{switch}
+structure, with one case for each of the 5 phases.
+
+\paragraph{WaveShaper}
+The wave-shaper is a bit more technical.
+It has the capability to pic different tables, according to the input
+frequency, thus generating bandwidth limited waves - however this proved to be
+both very processor heavy (quadratic interpolation was planned, but dropped
+because of lacing processor power) and the wave tables had to be extremely
+large, to not have audible ``jumps'' when switching.
+Thus the capability of changing wave shape according to frequency remains, but is
+unused.
+
+\begin{itemize}
+  \item The wave-shaper first determines the frequency, by comparing the last
+  input value with the current.
+  \item Then the correct point in the wave-table is found - this is being done
+  by converting the signal to fixed-point with precision varying according to
+  the wave-table length.
+  \item Everything right of the zero is truncated (this data
+  would have been used for interpolation) and the correct data-point in the
+  table is picked.
+\end{itemize}
+
+\paragraph{MidiInterpreter}
+As this document will not deal with the definitions of \emph{MIDI} a short
+explanation of the protocol can be found here \cite{MIDI}.
+
+In short \emph{MIDI} consists of 8 bit messages, first comes a control byte,
+always starting with 1 as the MSB. Then 3 bits to describe the message type and
+finally 3 bits to indicate channel ($0xF?$ indicates a system exclusive message
+and the channel $?$ is used as an extra parameter). Then follows one or more
+value messages. The MSB is always 0 for those.
+
+We have chosen only to implement note on channel 1, control byte: $0x80$,
+followed by the note. This will play the different game sounds
+Start:

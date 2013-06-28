@@ -9,11 +9,15 @@
 
 
 %TODO abstract
+\include{abstract}
+\include{resume}
 %TODO resumé
 %TODO whodunnit
 \clearpage
 \tableofcontents
 %TODO problemdecription
+%introduction
+	\include{introduction}
 %specifications
 \include{specification}
 %overall analysis
@@ -27,6 +31,8 @@
 	%TODO desing
 	%TODO implementation
 	\include{implementation_game}
+	\include{tests_game}
+
 	%TODO result
 
 % %Audio unit
@@ -44,10 +50,10 @@
 %%TODO Display unit (PuTTy)
 	
 	%TODO analysis
+%tests?
 
 %result?
 	\include{results_game}
-%tests?
 %discussion
 	\include{discussion}
 %conclution
@@ -60,6 +66,13 @@
 %"C:\Program Files\pgm\MiKTeX 2.9\miktex\bin\x64\bibtex.exe" -include-directory="C:\Users\Soren\Git\30010\rapport\rapport" -include-directory="C:\Users\Soren\Git\30010\rapport\rapport\tmp" "C:\Users\Soren\Git\30010\rapport\rapport\tmp\main.aux"
 
 %appendix
+\appendix
+\section{Game Manual}
+\include{manual}
+\section{Game Software Source}
+\subsection{Application Layer}
+\lstinputlisting[caption=main.c]{"../../termanoid/src/application layer/main.c"}
+
 %TODO journal
 
 

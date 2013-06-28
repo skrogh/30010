@@ -1,20 +1,16 @@
-\section{Specification}
-We chose to make an arkanoid like game with the following extensions
+\section{Introduction}
+The aim of this report is to present the design process of an arkanoid game clone running
+on an eZ8 microcontroller and displaying graphics in a terminal on a PC. The point in
+making this game is to showcase good design practices when working with a medium sized
+programming problem. This includes up front design with flow charts describing individual
+program functionality, sensible project structuring and managing, three layered design
+with layers that are independent of each other as well as documentation skills. \\
 
-\begin{enumerate}
-\item Continuously calculated reflection angle from the striker.
-\item Bricks with any number of lives, colored after this number.
-\item Background music.
-\item Sound effects.
-\item ASCII art backgrounds generated from real pictures.
-\item Analog joystick input.
-\item A score system.
-\item Multiple levels.
-\item Limited number of player lives.
-\item 30 frames per second graphics.
-\item Powerups.
-\item Highscores saveable on permanent media.
-\end{enumerate}
+The report is structured in two main parts since we have used two different pieces of hardware,
+The eZ8 microcontroller development board and a Texas Instruments Stellaris Launchpad. The
+launcpad is used for sound playback and recieves control commands from the eZ8 over SPI.
+Because the Stellaris Launchpad is a different piece of hardware it needs its own 
+hardware abstraction layer, and as it provides a different functionality, the sound 
+generation also has its own API. Therefore the report is split into a parts detailing
+the design process of both the software running on the eZ8 and Stellaris Launchpad. \\
 
-The list is ordered with items in descending priority. The last 2 items on the list
-did not make it into the final game.

@@ -15,6 +15,16 @@ the following features:
 	\item A score system.
 	\item Multiple levels.
 	\item Limited number of player lives.
+	\item 30 frames per second graphics.
 \end{itemize}
 Which is all but the two lowest priority items on our wanted feature list. The developed API and application code
-would allow for these features being added with only minor changes to the existing code.
+would allow for these features being added with only minor changes to the existing code. \\
+
+Using rendering optimizations we have circumvented some of the I/O bottlenecks that were a limiting factor in the
+design. We have not had any performance issues with code that does not make use of I/O and as such we are
+able to run the game at a constant framerate of 30 frames per second. \\
+
+Tests have been performed both on the audio modules and game modules. Although these tests were manual and
+not automated, they were still adequete to insure that the game is working as intended. However rare
+edge cases may not have been recognised.
+

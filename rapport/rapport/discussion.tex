@@ -1,2 +1,37 @@
 \section{Discussion}
+Upon inspection of the final product it is clear that our implementation of
+Smashing Bricks contains several areas that could benefit from being refactored.
+The slight redundancy identified in the collided code of the ball could be 
+refactored out to it's own function. Further more, while letting the ball
+itself handle all collision detection as it is the only entity that actually collides
+works fine for the current version of Smashing Bricks. Adding more entities
+that could collide would result in greatly reduced performance as the current
+version of collision detection scales in \(O(N^2)\) time. However, this is
+not a problem at the current level of simplicity. The game functions very well
+and doesn't skip any frames unless too many (40+) bricks are added. \\
 
+The timerlib hardware abstraction is also not quite up to scratch. Ideally this would
+be able to support all the available timers on the eZ8 (including the baud rate 
+generators). It would take calls from the timekeeping API that would manage
+what timers are available and present clear, abstracted functionality to the 
+application layer. All the hardware abstraction modules are very thin in our
+implementation. This is mostly because we did not feel the need to add functionality
+that wasn't needed for the application itself. \\
+
+Testing is most likely the area that could see the biggest improvement. Throughout 
+the project period, only manual tests have been performed. Verifying that the 
+application ran as intended using visual inspection of the graphics output and
+by examining variable state and control flow using the debugger. We believe that
+using automated testing would have helped us speed up development. \\
+
+Development time is another issue. We have tried to design a set of software that
+is easily extensible and modular, but the initial design burden was fairly large.
+For a project of this small size, it is questionable whether this is actually 
+necessary. However, since the project is meant to showcase this design process
+this was of course the way it was done. Using a more informal design approach
+would have yielded a game that was up and running more quickly, however development
+time would most likely have slowed down quickly due to bad design. We feel as if
+the initial design burden only started to pay off near the end of the project.
+This only applies to non critical applications of course. A simple game like
+an arkanoid clone will never cause severe damage or incur any cost to anyone
+if it features a few bugs due to bad design. 

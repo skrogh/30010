@@ -1,63 +1,78 @@
 \select@language {english}
-\contentsline {section}{\numberline {1}Specification}{3}{section.1}
-\contentsline {section}{\numberline {2}Analysis}{4}{section.2}
-\contentsline {section}{\numberline {3}Design}{5}{section.3}
-\contentsline {subsection}{\numberline {3.1}Game Design}{5}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Software Architecture Design}{5}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}API and Hardware modules}{9}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Hardware abstraction modules}{9}{subsubsection.3.3.1}
-\contentsline {paragraph}{SPI module}{9}{section*.5}
-\contentsline {paragraph}{Timerlib}{9}{section*.6}
-\contentsline {paragraph}{ADC input}{9}{section*.7}
-\contentsline {subsubsection}{\numberline {3.3.2}API modules}{9}{subsubsection.3.3.2}
-\contentsline {paragraph}{Input module}{9}{section*.8}
-\contentsline {paragraph}{Math}{9}{section*.9}
-\contentsline {paragraph}{Sound}{9}{section*.10}
-\contentsline {paragraph}{Graphics}{9}{section*.11}
-\contentsline {paragraph}{Timekeeping}{10}{section*.12}
-\contentsline {section}{\numberline {4}Implementation of Game Software}{11}{section.4}
-\contentsline {subsection}{\numberline {4.1}Hardware Abstraction Layer Implementation}{11}{subsection.4.1}
-\contentsline {paragraph}{SPI module}{11}{section*.13}
-\contentsline {paragraph}{Timerlib}{11}{section*.14}
-\contentsline {paragraph}{ADC input}{11}{section*.15}
-\contentsline {subsection}{\numberline {4.2}API Layer Implementation}{11}{subsection.4.2}
-\contentsline {paragraph}{Input Module}{11}{section*.16}
-\contentsline {paragraph}{Sound Module}{11}{section*.17}
-\contentsline {paragraph}{Math module}{11}{section*.18}
-\contentsline {paragraph}{Timekeeping Module}{11}{section*.19}
-\contentsline {paragraph}{Graphics Module}{12}{section*.20}
-\contentsline {subsection}{\numberline {4.3}Application Layer Implementation}{12}{subsection.4.3}
-\contentsline {paragraph}{Main function}{12}{section*.21}
-\contentsline {paragraph}{Levels Module}{12}{section*.22}
-\contentsline {paragraph}{Backgrounds module}{12}{section*.23}
-\contentsline {paragraph}{Entities}{12}{section*.24}
-\contentsline {paragraph}{Ball Entity}{12}{section*.25}
-\contentsline {paragraph}{Striker Entity}{13}{section*.27}
-\contentsline {paragraph}{Brick Entity}{13}{section*.28}
-\contentsline {subsection}{\numberline {4.4}Audio module introduction}{14}{subsection.4.4}
-\contentsline {subsubsection}{\numberline {4.4.1}An introduction to subtractive synthesis}{14}{subsubsection.4.4.1}
-\contentsline {subsection}{\numberline {4.5}Audio module analysis}{15}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}Audio module design}{16}{subsection.4.6}
-\contentsline {subsubsection}{\numberline {4.6.1}Overview}{16}{subsubsection.4.6.1}
-\contentsline {subsubsection}{\numberline {4.6.2}Design of the core modules}{17}{subsubsection.4.6.2}
-\contentsline {subsubsection}{\numberline {4.6.3}Design of the FIFO buffer}{18}{subsubsection.4.6.3}
-\contentsline {subsection}{\numberline {4.7}Audio module implementation}{19}{subsection.4.7}
-\contentsline {subsubsection}{\numberline {4.7.1}FIFO buffer}{19}{subsubsection.4.7.1}
-\contentsline {subsubsection}{\numberline {4.7.2}Hardware Interface Layer (\emph {HIL})}{20}{subsubsection.4.7.2}
-\contentsline {paragraph}{Timing LED}{21}{section*.36}
-\contentsline {subsubsection}{\numberline {4.7.3}implementation of the synth modules}{21}{subsubsection.4.7.3}
-\contentsline {paragraph}{VCO}{21}{section*.37}
-\contentsline {paragraph}{LFO}{21}{section*.38}
-\contentsline {paragraph}{Sequencer}{21}{section*.39}
-\contentsline {paragraph}{LowPass}{21}{section*.40}
-\contentsline {paragraph}{SVF}{21}{section*.41}
-\contentsline {paragraph}{AHDSR}{21}{section*.42}
-\contentsline {paragraph}{WaveShaper}{21}{section*.43}
-\contentsline {paragraph}{MidiInterpreter}{22}{section*.44}
-\contentsline {paragraph}{OneShotter}{22}{section*.45}
-\contentsline {subsection}{\numberline {4.8}Implementation of main function}{22}{subsection.4.8}
-\contentsline {subsection}{\numberline {4.9}Testing the audio module}{24}{subsection.4.9}
-\contentsline {subsection}{\numberline {4.10}Audio module results}{24}{subsection.4.10}
-\contentsline {section}{\numberline {5}The resulting game}{25}{section.5}
-\contentsline {section}{\numberline {6}Discussion}{27}{section.6}
-\contentsline {section}{\numberline {7}Conclusion}{28}{section.7}
+\contentsline {section}{\numberline {1}Introduction}{5}{section.1}
+\contentsline {section}{\numberline {2}Specification}{6}{section.2}
+\contentsline {section}{\numberline {3}Analysis}{7}{section.3}
+\contentsline {section}{\numberline {4}Design}{8}{section.4}
+\contentsline {subsection}{\numberline {4.1}Game Design}{8}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Software Architecture Design}{8}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}API and Hardware modules}{12}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}Hardware abstraction modules}{12}{subsubsection.4.3.1}
+\contentsline {paragraph}{SPI module}{12}{section*.5}
+\contentsline {paragraph}{Timerlib}{12}{section*.6}
+\contentsline {paragraph}{ADC input}{12}{section*.7}
+\contentsline {subsubsection}{\numberline {4.3.2}API modules}{12}{subsubsection.4.3.2}
+\contentsline {paragraph}{Input module}{12}{section*.8}
+\contentsline {paragraph}{Math}{12}{section*.9}
+\contentsline {paragraph}{Sound}{12}{section*.10}
+\contentsline {paragraph}{Graphics}{12}{section*.11}
+\contentsline {paragraph}{Timekeeping}{13}{section*.12}
+\contentsline {section}{\numberline {5}Implementation of Game Software}{14}{section.5}
+\contentsline {subsection}{\numberline {5.1}Hardware Abstraction Layer Implementation}{14}{subsection.5.1}
+\contentsline {paragraph}{SPI module}{14}{section*.13}
+\contentsline {paragraph}{Timerlib}{14}{section*.14}
+\contentsline {paragraph}{ADC input}{14}{section*.15}
+\contentsline {subsection}{\numberline {5.2}API Layer Implementation}{14}{subsection.5.2}
+\contentsline {paragraph}{Input Module}{14}{section*.16}
+\contentsline {paragraph}{Sound Module}{14}{section*.17}
+\contentsline {paragraph}{Math module}{14}{section*.18}
+\contentsline {paragraph}{Timekeeping Module}{14}{section*.19}
+\contentsline {paragraph}{Graphics Module}{15}{section*.20}
+\contentsline {subsection}{\numberline {5.3}Application Layer Implementation}{15}{subsection.5.3}
+\contentsline {paragraph}{Main function}{15}{section*.21}
+\contentsline {paragraph}{Levels Module}{15}{section*.22}
+\contentsline {paragraph}{Backgrounds module}{15}{section*.23}
+\contentsline {paragraph}{Entities}{15}{section*.24}
+\contentsline {paragraph}{Ball Entity}{15}{section*.25}
+\contentsline {paragraph}{Striker Entity}{16}{section*.27}
+\contentsline {paragraph}{Brick Entity}{16}{section*.28}
+\contentsline {subsection}{\numberline {5.4}Game Testing}{17}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Audio module introduction}{18}{subsection.5.5}
+\contentsline {subsubsection}{\numberline {5.5.1}An introduction to subtractive synthesis}{18}{subsubsection.5.5.1}
+\contentsline {subsection}{\numberline {5.6}Audio module analysis}{19}{subsection.5.6}
+\contentsline {subsection}{\numberline {5.7}Audio module design}{20}{subsection.5.7}
+\contentsline {subsubsection}{\numberline {5.7.1}Overview}{20}{subsubsection.5.7.1}
+\contentsline {subsubsection}{\numberline {5.7.2}Design of the core modules}{21}{subsubsection.5.7.2}
+\contentsline {subsubsection}{\numberline {5.7.3}Design of the FIFO buffer}{22}{subsubsection.5.7.3}
+\contentsline {subsection}{\numberline {5.8}Audio module implementation}{23}{subsection.5.8}
+\contentsline {subsubsection}{\numberline {5.8.1}FIFO buffer}{23}{subsubsection.5.8.1}
+\contentsline {subsubsection}{\numberline {5.8.2}Hardware Interface Layer (\emph {HIL})}{24}{subsubsection.5.8.2}
+\contentsline {paragraph}{Timing LED}{25}{section*.36}
+\contentsline {subsubsection}{\numberline {5.8.3}implementation of the synth modules}{25}{subsubsection.5.8.3}
+\contentsline {paragraph}{VCO}{25}{section*.37}
+\contentsline {paragraph}{LFO}{25}{section*.38}
+\contentsline {paragraph}{Sequencer}{25}{section*.39}
+\contentsline {paragraph}{LowPass}{25}{section*.40}
+\contentsline {paragraph}{SVF}{25}{section*.41}
+\contentsline {paragraph}{AHDSR}{25}{section*.42}
+\contentsline {paragraph}{WaveShaper}{25}{section*.43}
+\contentsline {paragraph}{MidiInterpreter}{26}{section*.44}
+\contentsline {paragraph}{OneShotter}{26}{section*.45}
+\contentsline {subsection}{\numberline {5.9}Implementation of main function}{26}{subsection.5.9}
+\contentsline {subsection}{\numberline {5.10}Testing the audio module}{28}{subsection.5.10}
+\contentsline {subsection}{\numberline {5.11}Audio module results}{28}{subsection.5.11}
+\contentsline {section}{\numberline {6}The resulting game}{29}{section.6}
+\contentsline {section}{\numberline {7}Discussion}{31}{section.7}
+\contentsline {section}{\numberline {8}Conclusion}{32}{section.8}
+\contentsline {section}{\numberline {A}Game Manual}{33}{appendix.A}
+\contentsline {section}{\numberline {B}Manual}{34}{appendix.B}
+\contentsline {subsection}{\numberline {B.1}NIGEL HUNT!}{34}{subsection.B.1}
+\contentsline {subsubsection}{\numberline {B.1.1}Setting up the Nigel entertainment System}{34}{subsubsection.B.1.1}
+\contentsline {subsubsection}{\numberline {B.1.2}Setting up the display:}{34}{subsubsection.B.1.2}
+\contentsline {subsubsection}{\numberline {B.1.3}Setting up sliding input}{34}{subsubsection.B.1.3}
+\contentsline {subsubsection}{\numberline {B.1.4}Setting up the external audio noisemaker}{34}{subsubsection.B.1.4}
+\contentsline {subsection}{\numberline {B.2}You are now ready to play!}{34}{subsection.B.2}
+\contentsline {subsubsection}{\numberline {B.2.1}How to play}{34}{subsubsection.B.2.1}
+\contentsline {subsubsection}{\numberline {B.2.2}Loosing the game}{34}{subsubsection.B.2.2}
+\contentsline {subsubsection}{\numberline {B.2.3}Winning the game}{35}{subsubsection.B.2.3}
+\contentsline {section}{\numberline {C}Game Software Source}{36}{appendix.C}
+\contentsline {subsection}{\numberline {C.1}Application Layer}{36}{subsection.C.1}

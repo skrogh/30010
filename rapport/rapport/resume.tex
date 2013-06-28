@@ -1,0 +1,17 @@
+\renewcommand{\abstractname}{resumé}
+\begin{abstract}
+Denne rapport gennemgår design og implementering af en arkanoid klon kaldet
+Smashing Bricks, der kører på en eZ8 mikrocontroller. Spillets grafik vises i
+en terminal på en PC der modtager ANSI koder fra microntrolleren over en UART.
+Spillet inkluderer også baggrundsmusik og lydeffekter, der afspilles af en 
+Stellaris Launchpad der modtager kommandoer fra eZ8 mikrocontrolleren over
+en SPI forbindelse. Spillet har baggrundsbilleder i ASCII art der er genererede
+fra raster billeder og det kører ved 30 frames per sekund i terminalen.
+Vi viser hvilke design beslutninger der er taget og præsenterer en forklaring
+af hvordan det er implementeret ved brug af flow charts der viser modulers
+kontrol flow og blok diagrammer der viser deres indbyrdes forbindelser, men
+ vi gennemgår ikke hver linje af koden da denne er tilgængelig i appendex.
+Det endelige design indeholder tre uafhængige abstraktionslag for både
+eZ8 og Stellarisen,  og det er modulært og let at udvide. Til sidst præsenterer
+vi resultatet med screenshots og en beskrivelse af gameplayet.
+\end{abstract}

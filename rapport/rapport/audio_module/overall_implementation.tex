@@ -7,9 +7,33 @@ figure:~\ref{fig:overview}
 \stdfig{0.8}{audiomodule/overview}{Block diagram of overall program
 structure}{fig:overview}
 
-The two main reasons for this is:
+The main reasons for this is that the application had to be ported to
+\emph{Windows} for testing.
+since it was not possible to run the application at real-time on a PC, the
+program ran for $x$ samples and this was then saved to a wave-file.
+Core hardware features on the \emph{Stellaris Launchpad} are simply missing on a
+computer, but making the layer in this way paves the way for easy portability (only
+hardInterface.c and to a limited degree hardInterface.h has to be changed).
+
+This layer might more accurately be called a glue layer, as it does not
+interface directly with the hardware:
 \begin{itemize}
-  \item There are very few functions in this layer - a
-layer more would just be a pass-through layer.
-  \item For testing the application had to be ported to \emph{Windows}
+  \item On the \emph{Stellaris Launchpad} the \emph{HIL} interfaces with a
+  driver library written by \emph{Texas Instruments} - valid for all
+  \emph{MCU's} from the same family. These functions then interface with the
+  hardware.
+  \item On \emph{Windows} the \emph{HIL} interfaces with a wave-file library
+  \cite{writewav}, which then in turn uses \emph{stdio.h}, that interfaces with
+  the operating system, interfacing with the hard-drive driver \ldots and so
+  on.
 \end{itemize}
+
+The rest of the document will primarily focus on implementation on the
+\emph{Stellaris Launchpad}.
+
+\input{audio_module/imp_FIFO} 
+
+\input{audio_module/imp_HIL}
+
+
+

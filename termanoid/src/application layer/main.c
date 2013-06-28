@@ -36,12 +36,12 @@ void start_game( striker_t ** striker, ball_t ** ball ) {
 	load_level( 1 );
 	start_current_level();	
 	game_state = PLAYING;
-	play_sound( POPCORN_START );
+	toggle_track( true );
 }
 
 //end a game and cleanup
 void end_game( striker_t ** striker, ball_t ** ball ) {
-	play_sound( POPCORN_STOP );
+	toggle_track( false );
 	destroy_striker( *striker );
 	destroy_ball( *ball );
 }
@@ -163,7 +163,7 @@ void main() {
 				get_input();
 				if ( inputvalues[ ACTION_BUTTON ] ) {
 					//if the user proceeded from the final screen
-					if ( level_counter >= NUM_LEVELS ) {
+					if ( level_counter > NUM_LEVELS ) {
 						level_counter = 1;
 						display_won_message( ball ); //blocking call till user accepts
 						end_game( &striker, &ball );

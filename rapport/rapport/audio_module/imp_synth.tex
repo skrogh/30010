@@ -73,3 +73,9 @@ value messages. The MSB is always 0 for those.
 We have chosen only to implement note on channel 1, control byte: $0x80$,
 followed by the note. This will play the different game sounds
 Start:
+
+\paragraph{OneShotter}
+The \emph{OmeShotter} can play back wave-files at different speeds. A counter
+counts up and on overflow the playback head moves, this playback head is used as
+index in an array storing the wave-file. The frame being pointed to is then
+output.

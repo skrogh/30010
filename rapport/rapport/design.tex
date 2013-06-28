@@ -116,95 +116,83 @@ the current level of entities that are no longer needed and the start new level 
 
 \clearpage
 
-It is now possible to derive the functions that each module must contain. For the hardware layer this is seen
-in figure \ref{hw_modules}. \\
+\subsection{API and Hardware modules}
+It is now possible to derive the functions that each module must contain. 
 
-\begin{figure}
-	\center
-	\begin{minipage}[t]{0.3\linewidth}
-		SPI module
-		\begin{itemize}
-			\item setup\_SPI\_master(), set up the eZ8 as an SPI master.
-			\item write\_spi(), write data over the SPI
-		\end{itemize}
-	\end{minipage}
-	\begin{minipage}[t]{0.3\linewidth}
-		Timerlib
-		\begin{itemize}
-			\item set\_timer(), set up an interrupt pointing to a function passed to it.
-		\end{itemize}
-	\end{minipage}
-	\begin{minipage}[t]{0.3\linewidth}
-		ADC input
-		\begin{itemize}
-			\item setup\_joystick(), enable the adc pins on which the joystick is located.
-			\item read\_joystick()
-		\end{itemize}
-	\end{minipage}
-	\caption{Hardware layer module functionality}
-	\label{hw_modules}
-\end{figure}
+\subsubsection{Hardware abstraction modules}
+\paragraph{SPI module}
+The hardware module that enables SPI communication support. It contains the following functions.
+\begin{itemize}
+	\item setup\_SPI\_master(), set up the eZ8 as an SPI master.
+	\item write\_spi(), write data over the SPI
+\end{itemize}
 
-Note that currently the timerlib can only set up TIMER0, since this is all that we deemed necessary. However, the calling
-chain from the application layer supports addition of more timers being enabled by timerlib. \\
+\paragraph{Timerlib}
+The hardware timer library, currently only supports a single timer as that is all that was needed.
+However the calling chain to set up a timer is set up such that adding support for more timers is
+trivial. It contains the following functions.
+\begin{itemize}
+	\item set\_timer(), set up an interrupt pointing to a function passed to it.
+\end{itemize}
 
-The modules in the API layer will need the functionality seen in figure \ref{api_modules}. 
+\paragraph{ADC input}
+ADC input module that is currently only concerned with the joystick that it assumes is
+placed on specific pins. It contains the following functions.
+\begin{itemize}
+	\item setup\_joystick(), enable the adc pins on which the joystick is located.
+	\item read\_joystick()
+\end{itemize}
 
-\begin{figure}
-	\center
-	\begin{minipage}[t]{\columnwidth}
-		\begin{minipage}[t]{0.3\linewidth}
-			Input module
-			\begin{itemize}
-				\item setup\_input(), initialize everything needed for getting input.
-				\item get\_input(), poll inputs and update the input state.
-			\end{itemize}
-		\end{minipage}
-		\begin{minipage}[t]{0.3\linewidth}
-			Math
-			\begin{itemize}
-				\item sin()/cos() cosine and sine functions (512 degree system).
-				\item Fixed point multiplication and division macros.
-			\end{itemize}
-		\end{minipage}
-		\begin{minipage}[t]{0.3\linewidth}
-			Sound
-			\begin{itemize}
-				\item setup\_sound(), enable needed functionality for playing sound.
-				\item play\_sound(), play a particular sound taken as an argument.
-			\end{itemize}
-		\end{minipage}
-	\end{minipage}
-	\vspace{1 cm}
-	\begin{minipage}[b]{\columnwidth}
-		\begin{minipage}[t]{0.5\linewidth}
-			Graphics
-			\begin{itemize}
-				\item gotoxy(), terminal cursor placement.
-				\item clrscr(), clear the terminal.
-				\item background\_color(), change the background color.
-				\item foreground\_color().
-				\item color(), change foreground and background simultanously.
-				\item draw\_chars\_bg(), draw character string on top of a background image.
-				\item draw\_char\_bg(), draw single character.
-				\item draw\_whole\_bg(), draw the entire current background.
-				\item set\_monochrome(), set the global monochrome variable
-				\item set\_background(), set the current background.
-				\item draw\_box(), draw a box with a white center for text.
-				\item draw\_borders(), draw borders at the terminal edges.
-			\end{itemize}
-		\end{minipage}
-		\begin{minipage}[t]{0.5\linewidth}
-			Timekeeping
-			\begin{itemize}
-				\item setup\_timer(), set up a timer with a given period and interrupt function, 
-						also supports chosing which timer to use although this is not currently supported
-						in the hardware library.
-			\end{itemize}
-		\end{minipage}
-	\end{minipage}
-	\caption{API layer functionality, only methods presented to the application layer.}
-	\label{api_modules}
-\end{figure}
+
+\subsubsection{API modules}
+\paragraph{Input module}
+The input module contains the following functions to setup and handle input from
+both the ADC and terminal.
+\begin{itemize}
+	\item setup\_input(), initialize everything needed for getting input.
+	\item get\_input(), poll inputs and update the input state.
+\end{itemize}
+
+\paragraph{Math}
+The math module currently only contains sine/cosine functions and 8.8 fixpoint macros.
+\begin{itemize}
+	\item sin()/cos() cosine and sine functions (512 degree system).
+	\item Fixed point multiplication and division macros.
+\end{itemize}
+
+\paragraph{Sound}
+The sound module connects with the SPI module to send midi commands to the stellaris launchpad.
+It contains the following functions.
+\begin{itemize}
+	\item setup\_sound(), enable needed functionality for playing sound.
+	\item play\_sound(), play a particular sound taken as an argument.
+\end{itemize}
+
+\paragraph{Graphics}
+The graphics module is the biggest API module, presenting the following functionality to the
+application layer.
+\begin{itemize}
+	\item gotoxy(), terminal cursor placement.
+	\item clrscr(), clear the terminal.
+	\item background\_color(), change the background color.
+	\item foreground\_color().
+	\item color(), change foreground and background simultanously.
+	\item draw\_chars\_bg(), draw character string on top of a background image.
+	\item draw\_char\_bg(), draw single character.
+	\item draw\_whole\_bg(), draw the entire current background.
+	\item set\_monochrome(), set the global monochrome variable
+	\item set\_background(), set the current background.
+	\item draw\_box(), draw a box with a white center for text.
+	\item draw\_borders(), draw borders at the terminal edges.
+\end{itemize}
+
+\paragraph{Timekeeping}
+The timekeeping module is linked to the hardware timerlib. They are separate to provide the ability
+to later add timer management of several timers to the timekeeping module.
+\begin{itemize}
+	\item setup\_timer(), set up a timer with a given period and interrupt function, 
+			also supports chosing which timer to use although this is not currently supported
+			in the hardware library.
+\end{itemize}
 
 It is now possible to implement the main game using this design.

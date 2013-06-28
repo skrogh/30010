@@ -12,6 +12,7 @@ typedef struct cleanup_info {
 	char state;
 } cleanup_t;
 
+//calculate new position from joystick input
 void update_striker( striker_t * striker ) {
 	unsigned char joystick_value; 
 	//old values for deletion
@@ -26,6 +27,7 @@ void update_striker( striker_t * striker ) {
 		//new values
 		striker -> x += FIX8_8_MULT( striker -> x_velocity, (char)(joystick_value - 150 ) );
 	}
+	//in case joystick is not working uncomment the following
 	//striker -> x += striker -> x_velocity * inputvalues[ RIGHT ];
 	//striker -> x -= striker -> x_velocity * inputvalues[ LEFT ];
 
@@ -36,6 +38,7 @@ void update_striker( striker_t * striker ) {
 		striker -> x = 2 << 8;	
 }
 
+//render the striker and calculate how many fields to remove from the old render
 void render_striker( striker_t * striker ) {
 	short old_x = ( (cleanup_t*)striker -> cleanup ) -> old_x;
 	short old_y = ( (cleanup_t*)striker -> cleanup ) -> old_y;
@@ -66,6 +69,7 @@ void render_striker( striker_t * striker ) {
 
 }
 
+//create a striker with default parameters
 striker_t *  create_striker( short x, short y ) {
 	striker_t * striker = malloc( sizeof ( striker_t ) );
 	striker -> cleanup = (cleanup_t*)malloc( sizeof( cleanup_t ) );

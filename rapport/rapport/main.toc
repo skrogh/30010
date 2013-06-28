@@ -16,15 +16,29 @@
 \contentsline {paragraph}{Graphics}{9}{section*.11}
 \contentsline {paragraph}{Timekeeping}{10}{section*.12}
 \contentsline {section}{\numberline {4}Implementation of Game Software}{11}{section.4}
-\contentsline {subsection}{\numberline {4.1}Hardware layer implementation}{11}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.1}Hardware Abstraction Layer Implementation}{11}{subsection.4.1}
 \contentsline {paragraph}{SPI module}{11}{section*.13}
 \contentsline {paragraph}{Timerlib}{11}{section*.14}
 \contentsline {paragraph}{ADC input}{11}{section*.15}
-\contentsline {subsection}{\numberline {4.2}Audio module introduction}{12}{subsection.4.2}
-\contentsline {subsubsection}{\numberline {4.2.1}An introduction to subtractive synthesis}{12}{subsubsection.4.2.1}
-\contentsline {subsection}{\numberline {4.3}Audio module analysis}{13}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Audio module design}{14}{subsection.4.4}
-\contentsline {subsubsection}{\numberline {4.4.1}Overview}{14}{subsubsection.4.4.1}
-\contentsline {subsubsection}{\numberline {4.4.2}Design of the core modules}{15}{subsubsection.4.4.2}
-\contentsline {subsubsection}{\numberline {4.4.3}Design of the FIFO buffer}{16}{subsubsection.4.4.3}
-\contentsline {subsection}{\numberline {4.5}Audio module implementation}{17}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.2}API Layer Implementation}{11}{subsection.4.2}
+\contentsline {paragraph}{Input Module}{11}{section*.16}
+\contentsline {paragraph}{Sound Module}{11}{section*.17}
+\contentsline {paragraph}{Math module}{11}{section*.18}
+\contentsline {paragraph}{Timekeeping Module}{11}{section*.19}
+\contentsline {paragraph}{Graphics Module}{12}{section*.20}
+\contentsline {subsection}{\numberline {4.3}Application Layer Implementation}{12}{subsection.4.3}
+\contentsline {paragraph}{Main function}{12}{section*.21}
+\contentsline {paragraph}{Levels Module}{12}{section*.22}
+\contentsline {paragraph}{Backgrounds module}{12}{section*.23}
+\contentsline {paragraph}{Entities}{12}{section*.24}
+\contentsline {paragraph}{Ball Entity}{12}{section*.25}
+\contentsline {subsection}{\numberline {4.4}Audio module introduction}{14}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}An introduction to subtractive synthesis}{14}{subsubsection.4.4.1}
+\contentsline {subsection}{\numberline {4.5}Audio module analysis}{15}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Audio module design}{16}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}Overview}{16}{subsubsection.4.6.1}
+\contentsline {subsubsection}{\numberline {4.6.2}Design of the core modules}{17}{subsubsection.4.6.2}
+\contentsline {subsubsection}{\numberline {4.6.3}Design of the FIFO buffer}{18}{subsubsection.4.6.3}
+\contentsline {subsection}{\numberline {4.7}Audio module implementation}{19}{subsection.4.7}
+\contentsline {subsubsection}{\numberline {4.7.1}FIFO buffer}{19}{subsubsection.4.7.1}
+\contentsline {subsubsection}{\numberline {4.7.2}Hardware Interface Layer (\emph {HIL})}{20}{subsubsection.4.7.2}

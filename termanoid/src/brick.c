@@ -5,7 +5,7 @@
 
 const unsigned char brick_graphic[] = { '\xC9', '\xCD', '\xCD', '\xCD', '\xCD', '\xCD', '\xCD', '\xBB',
 								   '\xC8', '\xCD', '\xCD', '\xCD', '\xCD', '\xCD', '\xCD', '\xBC' };
-
+//render a brick colored after its current number of hitpoints
 void render_brick( brick_t * brick ) {
 	char i, j;
 	if ( brick -> lives != 0 ) {

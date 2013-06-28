@@ -27,12 +27,14 @@ struct tag_internals {
 	short delay_timer;
 };
 
+//print the updated score
 void update_score( ball_t * ball ) {
 	color( 0xF, 0x0 );
 	gotoxy( SCORE_X, SCORE_Y );
 	printf( "Score: %03d", ball -> score );
 }
 
+//if the ball is not dead, render it and delete the old image
 void render_ball( ball_t * ball ) {
 	short old_x = ( (internals_t*) ball -> internals ) -> old_x;
 	short old_y = ( (internals_t*) ball -> internals ) -> old_y;
@@ -45,6 +47,7 @@ void render_ball( ball_t * ball ) {
 	} 
 }
 
+//Calculate the balls new position or make sure it spawns at the correct time
 void update_ball( ball_t * ball ) {
 
 	if ( ball -> state == ALIVE ) {
@@ -79,6 +82,8 @@ void update_ball( ball_t * ball ) {
 }
 
 //uses formula 2*(Vnormal + 90deg ) - Vdirection to calculate reflection
+// If the ball collides with the striker its new direction is calculated
+// if it hits a brick or border the reflection angle is calculated
 void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 		short other_y, short other_width, short other_height, char other_lives ) {
 	short normal_vector;
@@ -151,6 +156,8 @@ void collided_ball( ball_t * ball, void * other, char other_ID, short other_x,
 
 }
 
+//check collision with another entity, using the identity IDs to figure out
+//what kind of entity it is.
 void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 	short other_x, other_y, other_width, other_height;
 	char other_lives;
@@ -209,6 +216,8 @@ void check_collision_ball( ball_t * ball, void * other, char other_ID ) {
 	
 }
 
+
+//create a new ball in the center of the screen
 ball_t * create_ball() {
 	ball_t * ball = malloc( sizeof ( ball_t ) );
 	ball -> internals = (internals_t*)malloc( sizeof( internals_t ) );

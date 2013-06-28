@@ -113,6 +113,7 @@ as it is convenient to represent the player as the ball instead of the striker. 
 uses a polar representing of its velocity and angle such that it can move in any direction
 and reflection calculations are easy to perform. A flowchart of the
  code called when a collision has been detected can be seen in figure \ref{ball_flow}.
+Source is found in ball.c/h.
 
 \begin{figure}
 	\center
@@ -127,7 +128,9 @@ and reflection calculations are easy to perform. A flowchart of the
 The striker entity polls the keystate/joystick value when updating its position. It then 
 calculates a new position depending on the striker speed. When rendering, only the needed
 characters are drawn instead of erasing the striker before drawing it, to maximize drawing
-performance.
+performance. The striker speed and reactivity to the joystick is based on testing for
+what felt best. Source is found in striker.c/h.
 
 \paragraph{Brick Entity}
-The brick entity is only updated upon a collision since it cannot move, 
+The brick entity is only updated and rendered upon a collision since it cannot move. It is
+drawn in a color determined by its current amount of hitpoints. Source is found in brick.c/h.

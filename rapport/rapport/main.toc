@@ -32,6 +32,8 @@
 \contentsline {paragraph}{Backgrounds module}{12}{section*.23}
 \contentsline {paragraph}{Entities}{12}{section*.24}
 \contentsline {paragraph}{Ball Entity}{12}{section*.25}
+\contentsline {paragraph}{Striker Entity}{13}{section*.27}
+\contentsline {paragraph}{Brick Entity}{13}{section*.28}
 \contentsline {subsection}{\numberline {4.4}Audio module introduction}{14}{subsection.4.4}
 \contentsline {subsubsection}{\numberline {4.4.1}An introduction to subtractive synthesis}{14}{subsubsection.4.4.1}
 \contentsline {subsection}{\numberline {4.5}Audio module analysis}{15}{subsection.4.5}
@@ -42,3 +44,13 @@
 \contentsline {subsection}{\numberline {4.7}Audio module implementation}{19}{subsection.4.7}
 \contentsline {subsubsection}{\numberline {4.7.1}FIFO buffer}{19}{subsubsection.4.7.1}
 \contentsline {subsubsection}{\numberline {4.7.2}Hardware Interface Layer (\emph {HIL})}{20}{subsubsection.4.7.2}
+\contentsline {paragraph}{Timing LED}{21}{section*.36}
+\contentsline {subsubsection}{\numberline {4.7.3}implementation of the synth modules}{21}{subsubsection.4.7.3}
+\contentsline {paragraph}{VCO}{21}{section*.37}
+\contentsline {paragraph}{LFO}{21}{section*.38}
+\contentsline {paragraph}{Sequencer}{21}{section*.39}
+\contentsline {paragraph}{LowPass}{21}{section*.40}
+\contentsline {paragraph}{SVF}{21}{section*.41}
+\contentsline {paragraph}{AHDSR}{21}{section*.42}
+\contentsline {paragraph}{WaveShaper}{21}{section*.43}
+\contentsline {paragraph}{MidiInterpreter}{22}{section*.44}

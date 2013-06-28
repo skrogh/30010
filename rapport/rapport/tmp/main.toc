@@ -14,3 +14,4 @@
 \contentsline {subsection}{\numberline {3.6}Audio module implementation}{16}{subsection.3.6}
 \contentsline {subsubsection}{\numberline {3.6.1}FIFO buffer}{16}{subsubsection.3.6.1}
 \contentsline {subsubsection}{\numberline {3.6.2}Hardware Interface Layer (\emph {HIL})}{17}{subsubsection.3.6.2}
+\contentsline {subsubsection}{\numberline {3.6.3}implementation of the synth modules}{18}{subsubsection.3.6.3}
